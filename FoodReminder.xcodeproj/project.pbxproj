@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* FoodReminderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* FoodReminderAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28C286E10D94DF7D0034E888 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* CategoriesViewController.m */; };
+		28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */; };
+		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
+		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
+		5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272013278E7600E1E293 /* SCClassDefinition.m */; };
+		5589273213278E7600E1E293 /* SCGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272213278E7600E1E293 /* SCGlobals.m */; };
+		5589273313278E7600E1E293 /* SCPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272413278E7600E1E293 /* SCPropertyAttributes.m */; };
+		5589273413278E7600E1E293 /* SCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272613278E7600E1E293 /* SCTableViewCell.m */; };
+		5589273513278E7600E1E293 /* SCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272813278E7600E1E293 /* SCTableViewController.m */; };
+		5589273613278E7600E1E293 /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272A13278E7600E1E293 /* SCTableViewModel.m */; };
+		5589273713278E7600E1E293 /* SCTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272C13278E7600E1E293 /* SCTableViewSection.m */; };
+		5589273813278E7600E1E293 /* SCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272E13278E7600E1E293 /* SCViewController.m */; };
+		5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589275B1327927A00E1E293 /* EntriesViewController.m */; };
+		55B9DBAE132A3C9C0011585E /* ItemChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBAC132A3C9C0011585E /* ItemChoiceViewController.m */; };
+		55B9DBB7132A6E2D0011585E /* NewCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBB6132A6E2A0011585E /* NewCategoryViewController.m */; };
+		55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBBB132B8E270011585E /* NewEntryViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* FoodReminderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodReminderAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* FoodReminderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodReminderAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* FoodReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28860B760F44E54D00985440 /* FoodReminder.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = FoodReminder.xcdatamodel; sourceTree = "<group>"; };
+		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AAE50D9B0CCF005BE974 /* FoodReminder_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodReminder_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
+		5589271D13278E7600E1E293 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
+		5589271E13278E7600E1E293 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
+		5589271F13278E7600E1E293 /* SCClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClassDefinition.h; sourceTree = "<group>"; };
+		5589272013278E7600E1E293 /* SCClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClassDefinition.m; sourceTree = "<group>"; };
+		5589272113278E7600E1E293 /* SCGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGlobals.h; sourceTree = "<group>"; };
+		5589272213278E7600E1E293 /* SCGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGlobals.m; sourceTree = "<group>"; };
+		5589272313278E7600E1E293 /* SCPropertyAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPropertyAttributes.h; sourceTree = "<group>"; };
+		5589272413278E7600E1E293 /* SCPropertyAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPropertyAttributes.m; sourceTree = "<group>"; };
+		5589272513278E7600E1E293 /* SCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewCell.h; sourceTree = "<group>"; };
+		5589272613278E7600E1E293 /* SCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewCell.m; sourceTree = "<group>"; };
+		5589272713278E7600E1E293 /* SCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewController.h; sourceTree = "<group>"; };
+		5589272813278E7600E1E293 /* SCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewController.m; sourceTree = "<group>"; };
+		5589272913278E7600E1E293 /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewModel.h; sourceTree = "<group>"; };
+		5589272A13278E7600E1E293 /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewModel.m; sourceTree = "<group>"; };
+		5589272B13278E7600E1E293 /* SCTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewSection.h; sourceTree = "<group>"; };
+		5589272C13278E7600E1E293 /* SCTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSection.m; sourceTree = "<group>"; };
+		5589272D13278E7600E1E293 /* SCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCViewController.h; sourceTree = "<group>"; };
+		5589272E13278E7600E1E293 /* SCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCViewController.m; sourceTree = "<group>"; };
+		5589275A1327927A00E1E293 /* EntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesViewController.h; sourceTree = "<group>"; };
+		5589275B1327927A00E1E293 /* EntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesViewController.m; sourceTree = "<group>"; };
+		55B9DBAB132A3C9C0011585E /* ItemChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemChoiceViewController.h; sourceTree = "<group>"; };
+		55B9DBAC132A3C9C0011585E /* ItemChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemChoiceViewController.m; sourceTree = "<group>"; };
+		55B9DBB5132A6E2A0011585E /* NewCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewCategoryViewController.h; sourceTree = "<group>"; };
+		55B9DBB6132A6E2A0011585E /* NewCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCategoryViewController.m; sourceTree = "<group>"; };
+		55B9DBBA132B8E260011585E /* NewEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEntryViewController.h; sourceTree = "<group>"; };
+		55B9DBBB132B8E270011585E /* NewEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEntryViewController.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* FoodReminder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FoodReminder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5589271913278E1500E1E293 /* vendor */,
+				55B9DBB8132A6E410011585E /* controllers */,
+				1D3623240D0F684500981E51 /* FoodReminderAppDelegate.h */,
+				1D3623250D0F684500981E51 /* FoodReminderAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* FoodReminder.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* FoodReminder_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* FoodReminder-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				28860BE40F44EE6400985440 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5589271913278E1500E1E293 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				5589271B13278E7600E1E293 /* Sensible TableView */,
+			);
+			name = vendor;
+			sourceTree = "<group>";
+		};
+		5589271B13278E7600E1E293 /* Sensible TableView */ = {
+			isa = PBXGroup;
+			children = (
+				5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */,
+				5589271D13278E7600E1E293 /* SCBadgeView.h */,
+				5589271E13278E7600E1E293 /* SCBadgeView.m */,
+				5589271F13278E7600E1E293 /* SCClassDefinition.h */,
+				5589272013278E7600E1E293 /* SCClassDefinition.m */,
+				5589272113278E7600E1E293 /* SCGlobals.h */,
+				5589272213278E7600E1E293 /* SCGlobals.m */,
+				5589272313278E7600E1E293 /* SCPropertyAttributes.h */,
+				5589272413278E7600E1E293 /* SCPropertyAttributes.m */,
+				5589272513278E7600E1E293 /* SCTableViewCell.h */,
+				5589272613278E7600E1E293 /* SCTableViewCell.m */,
+				5589272713278E7600E1E293 /* SCTableViewController.h */,
+				5589272813278E7600E1E293 /* SCTableViewController.m */,
+				5589272913278E7600E1E293 /* SCTableViewModel.h */,
+				5589272A13278E7600E1E293 /* SCTableViewModel.m */,
+				5589272B13278E7600E1E293 /* SCTableViewSection.h */,
+				5589272C13278E7600E1E293 /* SCTableViewSection.m */,
+				5589272D13278E7600E1E293 /* SCViewController.h */,
+				5589272E13278E7600E1E293 /* SCViewController.m */,
+			);
+			path = "Sensible TableView";
+			sourceTree = "<group>";
+		};
+		55B9DBB8132A6E410011585E /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				28C286DF0D94DF7D0034E888 /* CategoriesViewController.h */,
+				28C286E00D94DF7D0034E888 /* CategoriesViewController.m */,
+				5589275A1327927A00E1E293 /* EntriesViewController.h */,
+				5589275B1327927A00E1E293 /* EntriesViewController.m */,
+				55B9DBAB132A3C9C0011585E /* ItemChoiceViewController.h */,
+				55B9DBAC132A3C9C0011585E /* ItemChoiceViewController.m */,
+				55B9DBB5132A6E2A0011585E /* NewCategoryViewController.h */,
+				55B9DBB6132A6E2A0011585E /* NewCategoryViewController.m */,
+				55B9DBBA132B8E260011585E /* NewEntryViewController.h */,
+				55B9DBBB132B8E270011585E /* NewEntryViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* FoodReminder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "FoodReminder" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FoodReminder;
+			productName = FoodReminder;
+			productReference = 1D6058910D05DD3D006BFB54 /* FoodReminder.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FoodReminder" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* FoodReminder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* FoodReminderAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* CategoriesViewController.m in Sources */,
+				28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */,
+				5589273013278E7600E1E293 /* SCBadgeView.m in Sources */,
+				5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */,
+				5589273213278E7600E1E293 /* SCGlobals.m in Sources */,
+				5589273313278E7600E1E293 /* SCPropertyAttributes.m in Sources */,
+				5589273413278E7600E1E293 /* SCTableViewCell.m in Sources */,
+				5589273513278E7600E1E293 /* SCTableViewController.m in Sources */,
+				5589273613278E7600E1E293 /* SCTableViewModel.m in Sources */,
+				5589273713278E7600E1E293 /* SCTableViewSection.m in Sources */,
+				5589273813278E7600E1E293 /* SCViewController.m in Sources */,
+				5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */,
+				55B9DBAE132A3C9C0011585E /* ItemChoiceViewController.m in Sources */,
+				55B9DBB7132A6E2D0011585E /* NewCategoryViewController.m in Sources */,
+				55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
+				INFOPLIST_FILE = "FoodReminder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = FoodReminder;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
+				INFOPLIST_FILE = "FoodReminder-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = FoodReminder;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "FoodReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FoodReminder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				28860B760F44E54D00985440 /* FoodReminder.xcdatamodel */,
+			);
+			currentVersion = 28860B760F44E54D00985440 /* FoodReminder.xcdatamodel */;
+			path = FoodReminder.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
