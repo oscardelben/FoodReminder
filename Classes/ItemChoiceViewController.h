@@ -16,5 +16,6 @@
 }
 
 - (void)dismissController;
+- (void)createNewEntryWithCurlAnimation;
 
 @end

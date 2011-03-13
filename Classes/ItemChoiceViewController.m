@@ -76,6 +76,23 @@
     [detailNavController release];
 }
 
+- (void)createNewEntryWithCurlAnimation
+{
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    viewController.parentController = self;
+    
+    UINavigationController *detailNavController = [[UINavigationController alloc] 
+                                                   initWithRootViewController:viewController];
+
+    [UIView beginAnimations:nil context:NULL];
+    [self.navigationController presentModalViewController:detailNavController animated:NO];
+
+    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:viewController.view.window cache:NO];
+    
+    [UIView commitAnimations];
+}
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {

@@ -31,15 +31,12 @@
     
     // TODO: done button should be disabled when name or category is blank
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
-    self.navigationItem.rightBarButtonItem = doneButton;
     
     self.title = @"New Entry";
     
     [cancelButton release];
-    [doneButton release];
     
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
     
@@ -68,12 +65,14 @@
     // TODO: use fancy buttons
     UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button1.frame = CGRectMake(20, 10, 150, 30);
-    [button1 setTitle:@"Text 1" forState:UIControlStateNormal];
+    [button1 setTitle:@"Save" forState:UIControlStateNormal];
+    [button1 addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:button1];
     
     UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button2.frame = CGRectMake(170, 10, 150, 30);
-    [button2 setTitle:@"Text 2" forState:UIControlStateNormal];
+    [button2 setTitle:@"Save + New" forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(saveAndCreateNew) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:button2];
     
     section.footerView = buttonsView;
@@ -91,6 +90,12 @@
 {
     [parentController performSelector:@selector(dismissController)];
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)saveAndCreateNew
+{
+    [self dismissModalViewControllerAnimated:NO];
+    [parentController performSelector:@selector(createNewEntryWithCurlAnimation)];
 }
 
 - (void)cancel
