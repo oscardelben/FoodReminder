@@ -16,6 +16,8 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* CategoriesViewController.m */; };
 		28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */; };
+		5526AF41132CDCB6000EB6DC /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526AF40132CDCB6000EB6DC /* GradientButton.m */; };
+		5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B012132D078B000EB6DC /* NSString+DBExtensions.m */; };
 		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
 		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
 		5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272013278E7600E1E293 /* SCClassDefinition.m */; };
@@ -46,6 +48,10 @@
 		28C286DF0D94DF7D0034E888 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5526AF3F132CDCB6000EB6DC /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
+		5526AF40132CDCB6000EB6DC /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
+		5526B011132D078B000EB6DC /* NSString+DBExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DBExtensions.h"; sourceTree = "<group>"; };
+		5526B012132D078B000EB6DC /* NSString+DBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DBExtensions.m"; sourceTree = "<group>"; };
 		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
 		5589271D13278E7600E1E293 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
 		5589271E13278E7600E1E293 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
@@ -152,9 +158,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5526AF3E132CDCB6000EB6DC /* GradientButton */ = {
+			isa = PBXGroup;
+			children = (
+				5526AF3F132CDCB6000EB6DC /* GradientButton.h */,
+				5526AF40132CDCB6000EB6DC /* GradientButton.m */,
+			);
+			path = GradientButton;
+			sourceTree = "<group>";
+		};
+		5526B010132D078A000EB6DC /* NSStringExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5526B011132D078B000EB6DC /* NSString+DBExtensions.h */,
+				5526B012132D078B000EB6DC /* NSString+DBExtensions.m */,
+			);
+			path = NSStringExtensions;
+			sourceTree = "<group>";
+		};
 		5589271913278E1500E1E293 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5526B010132D078A000EB6DC /* NSStringExtensions */,
+				5526AF3E132CDCB6000EB6DC /* GradientButton */,
 				5589271B13278E7600E1E293 /* Sensible TableView */,
 			);
 			name = vendor;
@@ -282,6 +308,8 @@
 				55B9DBAE132A3C9C0011585E /* ItemChoiceViewController.m in Sources */,
 				55B9DBB7132A6E2D0011585E /* NewCategoryViewController.m in Sources */,
 				55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */,
+				5526AF41132CDCB6000EB6DC /* GradientButton.m in Sources */,
+				5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

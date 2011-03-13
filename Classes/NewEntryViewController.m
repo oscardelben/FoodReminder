@@ -8,6 +8,8 @@
 
 #import "NewEntryViewController.h"
 #import "FoodReminderAppDelegate.h"
+#import "GradientButton.h"
+#import "NSString+DBExtensions.h"
 
 @implementation NewEntryViewController
 
@@ -25,19 +27,17 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
-    // TODO: done button should be disabled when name or category is blank
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    
     self.navigationItem.leftBarButtonItem = cancelButton;
+    [cancelButton release];
     
     self.title = @"New Entry";
     
-    [cancelButton release];
-    
+    // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
     
     SCTableViewSection *section = [SCTableViewSection section];
@@ -57,21 +57,20 @@
     [section addCell:categoryCell];
     
     // buttons
-    // create custom view
-    // use the blur? transition for save and create new
     
     UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     
-    // TODO: use fancy buttons
-    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button1.frame = CGRectMake(20, 10, 150, 30);
+    button1 = [[GradientButton alloc] initWithFrame:CGRectMake(20, 10, 120, 30)];
+    [button1 useBlackStyle];
+    button1.hidden = YES;
     [button1 setTitle:@"Save" forState:UIControlStateNormal];
     [button1 addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:button1];
     
-    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button2.frame = CGRectMake(170, 10, 150, 30);
-    [button2 setTitle:@"Save + New" forState:UIControlStateNormal];
+    button2 = [[GradientButton alloc] initWithFrame:CGRectMake(180, 10, 120, 30)];
+    [button2 useBlackStyle];
+    button2.hidden = YES;
+    [button2 setTitle:@"Add New" forState:UIControlStateNormal];
     [button2 addTarget:self action:@selector(saveAndCreateNew) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:button2];
     
@@ -83,17 +82,33 @@
 {
     [parentController release];
     [tableModel release];
+    [button1 release];
+    [button2 release];
     [super dealloc];
+}
+
+- (BOOL)valid
+{
+    NSString *name = [entry valueForKey:@"name"];
+    NSManagedObject *category = [entry valueForKey:@"category"];
+    
+    return (name && ![name blank] && category);
 }
 
 - (void)save
 {
+    if (![self valid])
+        [managedObjectContext deleteObject:entry];
+    
     [parentController performSelector:@selector(dismissController)];
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)saveAndCreateNew
 {
+    if (![self valid])
+        [managedObjectContext deleteObject:entry];
+    
     [self dismissModalViewControllerAnimated:NO];
     [parentController performSelector:@selector(createNewEntryWithCurlAnimation)];
 }
@@ -104,5 +119,24 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
+#pragma mark -
+#pragma mark SCTableViewModelDelegate methods
+
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BOOL valid = [self valid];
+
+    if (valid && button1.hidden)
+    {
+        button1.hidden = NO;
+        button2.hidden = NO;
+    }
+    else if (!valid && !button1.hidden)
+    {
+        button1.hidden = YES;
+        button2.hidden = YES;
+    }
+}
 
 @end

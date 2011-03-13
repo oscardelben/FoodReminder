@@ -8,6 +8,8 @@
 
 #import "NewCategoryViewController.h"
 #import "FoodReminderAppDelegate.h"
+#import "NSString+DBExtensions.h"
+#import "GradientButton.h"
 
 @implementation NewCategoryViewController
 
@@ -25,30 +27,40 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
-    // TODO: done button should be disabled when name is blank
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
-    self.navigationItem.rightBarButtonItem = doneButton;
     
     self.title = @"New Category";
     
     [cancelButton release];
-    [doneButton release];
+    
+    // Save button
+    
+    UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    
+    button1 = [[GradientButton alloc] initWithFrame:CGRectMake(20, 10, 120, 30)];
+    [button1 useBlackStyle];
+    button1.hidden = YES;
+    [button1 setTitle:@"Save" forState:UIControlStateNormal];
+    [button1 addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    [buttonsView addSubview:button1];
     
     // Instantiate the table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
+    tableModel.delegate = self;
     
     SCTableViewSection *section = [SCTableViewSection section];
-    [tableModel addSection:section];
     
     SCTextFieldCell *nameCell = [SCTextFieldCell cellWithText:@"Name" withBoundObject:category withPropertyName:@"name"];
     [section addCell:nameCell];
+    section.footerView = buttonsView;
+    
+    [tableModel addSection:section];
 }
 
 - (void)dealloc
@@ -58,8 +70,18 @@
     [super dealloc];
 }
 
+- (BOOL)valid
+{
+    NSString *name = [category valueForKey:@"name"];
+    
+    return (name && ![name blank]);
+}
+
 - (void)save
 {
+    if (![self valid])
+        [managedObjectContext deleteObject:category];
+    
     [parentController performSelector:@selector(dismissController)];
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -68,6 +90,14 @@
 {
     [managedObjectContext deleteObject:category];
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark SCTableViewModelDelegate methods
+
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    button1.hidden = [self valid] ? NO : YES;
 }
 
 @end

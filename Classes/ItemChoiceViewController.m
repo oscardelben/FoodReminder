@@ -87,7 +87,7 @@
     [UIView beginAnimations:nil context:NULL];
     [self.navigationController presentModalViewController:detailNavController animated:NO];
 
-    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationDuration:0.8];
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:viewController.view.window cache:NO];
     
     [UIView commitAnimations];
