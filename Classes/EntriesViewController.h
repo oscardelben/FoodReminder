@@ -17,4 +17,6 @@
 
 @property (nonatomic, retain) NSManagedObject *category;
 
+- (void)reloadEntries;
+
 @end
