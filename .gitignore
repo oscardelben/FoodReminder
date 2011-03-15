@@ -1,3 +1,5 @@
+# taken from http://blog.illuminex.com/2009/10/better-sample-gitignore-file-for-xcode.html
+
 # Mac OS X Finder and whatnot
 .DS_Store
 
@@ -13,6 +15,9 @@ dsa_priv.pem
 *.perspective
 *.perspectivev3
 *.pbxuser
+
+# Xcode 4 http://stackoverflow.com/questions/49478/git-ignore-file-for-xcode-projects
+xcuserdata
 
 
 # Generated files
