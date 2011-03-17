@@ -10,6 +10,7 @@
 #import "FoodReminderAppDelegate.h"
 #import "EntriesViewController.h"
 #import "ItemChoiceViewController.h"
+#import "Entry.h"
 
 @implementation CategoriesViewController
 
@@ -82,6 +83,19 @@
 	
 	[self.navigationController pushViewController:entriesViewController animated:YES];
 	[entriesViewController release];
+}
+
+
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
+																   sectionAtIndex:indexPath.section];
+	Category *category = (Category *)[section.items objectAtIndex:indexPath.row];
+    
+    int sum = [Entry expiringTodayWithCategory:category];
+    
+    if (sum > 0)
+        cell.badgeView.text = [NSString stringWithFormat:@"%i", sum];
 }
 
 @end

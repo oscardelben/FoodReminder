@@ -29,6 +29,7 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 - (void)saveContext;
+- (void)setLocalNotificationsForApplication:(UIApplication *)application;
 
 @end
 

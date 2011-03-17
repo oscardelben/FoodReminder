@@ -33,6 +33,8 @@
 		55B9DBAE132A3C9C0011585E /* ItemChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBAC132A3C9C0011585E /* ItemChoiceViewController.m */; };
 		55B9DBB7132A6E2D0011585E /* NewCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBB6132A6E2A0011585E /* NewCategoryViewController.m */; };
 		55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBBB132B8E270011585E /* NewEntryViewController.m */; };
+		55BDEFA8133201E9005A89D4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFA7133201E9005A89D4 /* Entry.m */; };
+		55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFAB133202A6005A89D4 /* NSDate+Calculations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,10 @@
 		55B9DBB6132A6E2A0011585E /* NewCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCategoryViewController.m; sourceTree = "<group>"; };
 		55B9DBBA132B8E260011585E /* NewEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEntryViewController.h; sourceTree = "<group>"; };
 		55B9DBBB132B8E270011585E /* NewEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEntryViewController.m; sourceTree = "<group>"; };
+		55BDEFA6133201E9005A89D4 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
+		55BDEFA7133201E9005A89D4 /* Entry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entry.m; sourceTree = "<group>"; };
+		55BDEFAA133202A6005A89D4 /* NSDate+Calculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Calculations.h"; sourceTree = "<group>"; };
+		55BDEFAB133202A6005A89D4 /* NSDate+Calculations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Calculations.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FoodReminder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FoodReminder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +109,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				55BDEF9C13320007005A89D4 /* Models */,
 				5589271913278E1500E1E293 /* vendor */,
 				55B9DBB8132A6E410011585E /* controllers */,
 				1D3623240D0F684500981E51 /* FoodReminderAppDelegate.h */,
@@ -182,6 +189,7 @@
 		5589271913278E1500E1E293 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				55BDEFA9133202A6005A89D4 /* DateCalculations */,
 				5526B010132D078A000EB6DC /* NSStringExtensions */,
 				5526AF3E132CDCB6000EB6DC /* GradientButton */,
 				5589271B13278E7600E1E293 /* Sensible TableView */,
@@ -232,6 +240,24 @@
 				5526B01F132E633D000EB6DC /* EditEntryViewController.m */,
 			);
 			name = controllers;
+			sourceTree = "<group>";
+		};
+		55BDEF9C13320007005A89D4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55BDEFA6133201E9005A89D4 /* Entry.h */,
+				55BDEFA7133201E9005A89D4 /* Entry.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		55BDEFA9133202A6005A89D4 /* DateCalculations */ = {
+			isa = PBXGroup;
+			children = (
+				55BDEFAA133202A6005A89D4 /* NSDate+Calculations.h */,
+				55BDEFAB133202A6005A89D4 /* NSDate+Calculations.m */,
+			);
+			path = DateCalculations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +342,8 @@
 				5526AF41132CDCB6000EB6DC /* GradientButton.m in Sources */,
 				5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */,
 				5526B020132E6340000EB6DC /* EditEntryViewController.m in Sources */,
+				55BDEFA8133201E9005A89D4 /* Entry.m in Sources */,
+				55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +360,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
 				INFOPLIST_FILE = "FoodReminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = FoodReminder;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -346,7 +374,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
 				INFOPLIST_FILE = "FoodReminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = FoodReminder;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

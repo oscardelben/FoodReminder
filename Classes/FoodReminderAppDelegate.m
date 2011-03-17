@@ -7,7 +7,7 @@
 //
 
 #import "FoodReminderAppDelegate.h"
-
+#import "Entry.h"
 
 @implementation FoodReminderAppDelegate
 
@@ -44,6 +44,7 @@
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     [self saveContext];
+    [self setLocalNotificationsForApplication:application];
 }
 
 
@@ -66,6 +67,7 @@
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self saveContext];
+    [self setLocalNotificationsForApplication:application];
 }
 
 
@@ -84,7 +86,12 @@
             abort();
         } 
     }
-}    
+}
+
+- (void)setLocalNotificationsForApplication:(UIApplication *)application
+{
+    application.applicationIconBadgeNumber = [Entry expiringToday];
+}
 
 
 #pragma mark -
