@@ -50,10 +50,11 @@
     
     // Category
     SCClassDefinition *categoryDef = [SCClassDefinition definitionWithEntityName:@"Category" withManagedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];
-
+    
     SCSelectionCell *categoryCell = [SCObjectSelectionCell cellWithText:@"Category" withBoundObject:entry withPropertyName:@"category"];
     [categoryCell setAttributesTo:[SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:categoryDef withItemsTitlePropertyName:@"name" allowMultipleSelection:NO allowNoSelection:NO]];
     categoryCell.autoDismissDetailView = YES;
+    categoryCell.delegate = self;
     [section addCell:categoryCell];
     
     // Due To

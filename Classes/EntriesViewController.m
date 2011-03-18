@@ -19,40 +19,44 @@
 
 - (void)viewDidLoad
 {
-	self.title = [category valueForKey:@"name"];
+	self.title = @"Food Reminder";
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+    
+    self.navigationItem.rightBarButtonItem = addButton;
     
 	NSManagedObjectContext *managedObjectContext = 
         [(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
 	
 	SCClassDefinition *entryDef =
 	[SCClassDefinition definitionWithEntityName:@"Entry" withManagedObjectContext:managedObjectContext
-							  withPropertyNames: [NSArray arrayWithObjects:@"name", @"category", @"due_to", nil]];
+							  withPropertyNames: [NSArray arrayWithObjects:@"name", @"due_to", nil]];
 
     // order
     entryDef.keyPropertyName = @"due_to";
     // table model
     
+    // add validation
+    
 	tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
     tableModel.delegate = self;
 	
-	// Create and add the objects section
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category = %@", category];
-    
-    SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil withEntityClassDefinition:entryDef usingPredicate:predicate];
-    objectsSection.allowEditDetailView = NO;
+    SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil withEntityClassDefinition:entryDef];
+    objectsSection.addButtonItem = self.navigationItem.rightBarButtonItem;
+    // TODO: mettere comunque la possibilità di aggiungere più entry alla volta
     
 	[tableModel addSection:objectsSection];
 }
 
+/*
 - (void)reloadEntries
 {
     [tableModel reloadBoundValues];
     [tableModel.modeledTableView reloadData];
 }
-
+*/
  
 - (void)dealloc {	
-    [category release];
 	[tableModel release];
     [super dealloc];
 }
@@ -73,7 +77,7 @@
     
     cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
 }
-
+/*
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
@@ -87,5 +91,5 @@
     [self.navigationController pushViewController:editViewController animated:YES];
     [editViewController release];
 }
-
+*/
 @end

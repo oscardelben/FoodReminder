@@ -10,13 +10,11 @@
 #import "SCTableViewModel.h"
 
 @interface EntriesViewController : UITableViewController <SCTableViewModelDelegate> {
-	NSManagedObject *category;
-	
 	SCTableViewModel *tableModel;
 }
 
 @property (nonatomic, retain) NSManagedObject *category;
 
-- (void)reloadEntries;
+//- (void)reloadEntries;
 
 @end
