@@ -13,8 +13,6 @@
 	SCTableViewModel *tableModel;
 }
 
-@property (nonatomic, retain) NSManagedObject *category;
-
-//- (void)reloadEntries;
+- (void)reloadEntries;
 
 @end

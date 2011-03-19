@@ -40,6 +40,7 @@
     
     // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
+    tableModel.delegate = self;
     
     SCTableViewSection *section = [SCTableViewSection section];
     [tableModel addSection:section];
@@ -47,15 +48,6 @@
     // Name
     SCTextFieldCell *nameCell = [SCTextFieldCell cellWithText:@"Name" withBoundObject:entry withPropertyName:@"name"];
     [section addCell:nameCell];
-    
-    // Category
-    SCClassDefinition *categoryDef = [SCClassDefinition definitionWithEntityName:@"Category" withManagedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];
-    
-    SCSelectionCell *categoryCell = [SCObjectSelectionCell cellWithText:@"Category" withBoundObject:entry withPropertyName:@"category"];
-    [categoryCell setAttributesTo:[SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:categoryDef withItemsTitlePropertyName:@"name" allowMultipleSelection:NO allowNoSelection:NO]];
-    categoryCell.autoDismissDetailView = YES;
-    categoryCell.delegate = self;
-    [section addCell:categoryCell];
     
     // Due To
     SCDateCell *dateCell = [SCDateCell cellWithText:@"Due to" withBoundObject:entry withDatePropertyName:@"due_to"];
@@ -85,7 +77,6 @@
 
 - (void)dealloc
 {
-    [parentController release];
     [tableModel release];
     [button1 release];
     [button2 release];
@@ -95,17 +86,16 @@
 - (BOOL)valid
 {
     NSString *name = [entry valueForKey:@"name"];
-    NSManagedObject *category = [entry valueForKey:@"category"];
     
-    return (name && ![name blank] && category);
+    return (name && ![name blank]);
 }
 
 - (void)save
 {
     if (![self valid])
         [managedObjectContext deleteObject:entry];
-    
-    [parentController performSelector:@selector(dismissController)];
+
+    [parentController performSelector:@selector(reloadEntries)];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -114,6 +104,7 @@
     if (![self valid])
         [managedObjectContext deleteObject:entry];
     
+    [parentController performSelector:@selector(reloadEntries)];
     [self dismissModalViewControllerAnimated:NO];
     [parentController performSelector:@selector(createNewEntryWithCurlAnimation)];
 }
@@ -121,6 +112,8 @@
 - (void)cancel
 {
     [managedObjectContext deleteObject:entry];
+    
+    [parentController performSelector:@selector(reloadEntries)];
     [self dismissModalViewControllerAnimated:YES];
 }
 

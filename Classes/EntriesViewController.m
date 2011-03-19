@@ -8,11 +8,10 @@
 
 #import "EntriesViewController.h"
 #import "FoodReminderAppDelegate.h"
+#import "NewEntryViewController.h"
 #import "EditEntryViewController.h"
 
 @implementation EntriesViewController
-
-@synthesize category;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -21,7 +20,7 @@
 {
 	self.title = @"Food Reminder";
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addEntry)];
     
     self.navigationItem.rightBarButtonItem = addButton;
     
@@ -34,32 +33,58 @@
 
     // order
     entryDef.keyPropertyName = @"due_to";
-    // table model
-    
-    // add validation
-    
+
+    // table model    
 	tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
     tableModel.delegate = self;
 	
     SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil withEntityClassDefinition:entryDef];
-    objectsSection.addButtonItem = self.navigationItem.rightBarButtonItem;
-    // TODO: mettere comunque la possibilità di aggiungere più entry alla volta
+    objectsSection.allowEditDetailView = NO;
     
 	[tableModel addSection:objectsSection];
 }
 
-/*
+- (void)dealloc {	
+	[tableModel release];
+    [super dealloc];
+}
+
+- (void)addEntry
+{
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    viewController.parentController = self;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    [self.navigationController presentModalViewController:navController animated:YES];
+    
+    [viewController release];
+    [navController release];
+}
+
+- (void)createNewEntryWithCurlAnimation
+{
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    viewController.parentController = self;
+    
+    UINavigationController *detailNavController = [[UINavigationController alloc] 
+                                                   initWithRootViewController:viewController];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [self.navigationController presentModalViewController:detailNavController animated:NO];
+    
+    [UIView setAnimationDuration:0.8];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:viewController.view.window cache:NO];
+    
+    [UIView commitAnimations];
+}
+
 - (void)reloadEntries
 {
     [tableModel reloadBoundValues];
     [tableModel.modeledTableView reloadData];
 }
-*/
- 
-- (void)dealloc {	
-	[tableModel release];
-    [super dealloc];
-}
+
 
 #pragma mark -
 #pragma mark SCTableViewModelDelegate Methods
@@ -77,7 +102,8 @@
     
     cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
 }
-/*
+
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
@@ -91,5 +117,5 @@
     [self.navigationController pushViewController:editViewController animated:YES];
     [editViewController release];
 }
-*/
+
 @end

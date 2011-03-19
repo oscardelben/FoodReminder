@@ -11,7 +11,7 @@
 
 @class GradientButton;
 
-@interface NewEntryViewController : UITableViewController <SCTableViewModelDelegate, SCTableViewCellDelegate> {
+@interface NewEntryViewController : UITableViewController <SCTableViewModelDelegate> {
     NSManagedObject *entry;
     
     SCTableViewModel *tableModel;
