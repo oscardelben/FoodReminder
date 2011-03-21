@@ -7,25 +7,28 @@
 //
 
 #import "FoodReminderAppDelegate.h"
+#import "EntriesViewController.h"
 #import "Entry.h"
 
 @implementation FoodReminderAppDelegate
 
 @synthesize window;
-@synthesize navigationController;
-
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-    // Override point for customization after application launch.
-
-    // Add the navigation controller's view to the window and display.
-    [self.window addSubview:navigationController.view];
+    EntriesViewController *viewController = [[EntriesViewController alloc] initWithNibName:@"EntriesViewController" bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    navController.navigationBarHidden = YES;
+    
+    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    
+    [self.window addSubview:navController.view];
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
@@ -90,6 +93,7 @@
 
 - (void)setLocalNotificationsForApplication:(UIApplication *)application
 {
+    // TODO: tis only works if they open the app daily. It would be cool to have a background process
     application.applicationIconBadgeNumber = [Entry expiringToday];
 }
 
@@ -205,7 +209,6 @@
     [managedObjectModel_ release];
     [persistentStoreCoordinator_ release];
     
-    [navigationController release];
     [window release];
     [super dealloc];
 }

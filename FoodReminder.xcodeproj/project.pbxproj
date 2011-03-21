@@ -13,11 +13,10 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */; };
-		5526AF41132CDCB6000EB6DC /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526AF40132CDCB6000EB6DC /* GradientButton.m */; };
 		5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B012132D078B000EB6DC /* NSString+DBExtensions.m */; };
 		5526B020132E6340000EB6DC /* EditEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B01F132E633D000EB6DC /* EditEntryViewController.m */; };
+		5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532DF7D1335148600E30A3C /* SettingsViewController.m */; };
 		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
 		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
 		5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272013278E7600E1E293 /* SCClassDefinition.m */; };
@@ -29,6 +28,16 @@
 		5589273713278E7600E1E293 /* SCTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272C13278E7600E1E293 /* SCTableViewSection.m */; };
 		5589273813278E7600E1E293 /* SCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272E13278E7600E1E293 /* SCViewController.m */; };
 		5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589275B1327927A00E1E293 /* EntriesViewController.m */; };
+		5594239E13357489007039F3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5594239D13357489007039F3 /* MainWindow.xib */; };
+		559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EEF13360AF900180E4E /* EntriesViewController.xib */; };
+		559B0EF213361A7300180E4E /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF113361A7300180E4E /* background.png */; };
+		559B0EF413361CA500180E4E /* tableBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF313361CA500180E4E /* tableBackground.png */; };
+		559B0EF61336211100180E4E /* addProducts.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF51336211100180E4E /* addProducts.png */; };
+		559B0F0613363A6200180E4E /* ClassyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B0F0513363A6200180E4E /* ClassyButton.m */; };
+		559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F0713363AAC00180E4E /* NewEntryViewController.xib */; };
+		559B0F1213363DA300180E4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559B0F1113363DA300180E4E /* QuartzCore.framework */; };
+		559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F151336A90000180E4E /* BrushScriptStd.ttf */; };
+		559B0F1813375F2200180E4E /* EditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F1713375F2200180E4E /* EditEntryViewController.xib */; };
 		55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBBB132B8E270011585E /* NewEntryViewController.m */; };
 		55BDEFA8133201E9005A89D4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFA7133201E9005A89D4 /* Entry.m */; };
 		55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFAB133202A6005A89D4 /* NSDate+Calculations.m */; };
@@ -44,14 +53,13 @@
 		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* FoodReminder_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodReminder_Prefix.pch; sourceTree = "<group>"; };
-		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5526AF3F132CDCB6000EB6DC /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
-		5526AF40132CDCB6000EB6DC /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		5526B011132D078B000EB6DC /* NSString+DBExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DBExtensions.h"; sourceTree = "<group>"; };
 		5526B012132D078B000EB6DC /* NSString+DBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DBExtensions.m"; sourceTree = "<group>"; };
 		5526B01E132E633A000EB6DC /* EditEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEntryViewController.h; sourceTree = "<group>"; };
 		5526B01F132E633D000EB6DC /* EditEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEntryViewController.m; sourceTree = "<group>"; };
+		5532DF7C1335148500E30A3C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		5532DF7D1335148600E30A3C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
 		5589271D13278E7600E1E293 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
 		5589271E13278E7600E1E293 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
@@ -73,6 +81,17 @@
 		5589272E13278E7600E1E293 /* SCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCViewController.m; sourceTree = "<group>"; };
 		5589275A1327927A00E1E293 /* EntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesViewController.h; sourceTree = "<group>"; };
 		5589275B1327927A00E1E293 /* EntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesViewController.m; sourceTree = "<group>"; };
+		5594239D13357489007039F3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		559B0EEF13360AF900180E4E /* EntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntriesViewController.xib; sourceTree = "<group>"; };
+		559B0EF113361A7300180E4E /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		559B0EF313361CA500180E4E /* tableBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableBackground.png; sourceTree = "<group>"; };
+		559B0EF51336211100180E4E /* addProducts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addProducts.png; sourceTree = "<group>"; };
+		559B0F0413363A6200180E4E /* ClassyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassyButton.h; sourceTree = "<group>"; };
+		559B0F0513363A6200180E4E /* ClassyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassyButton.m; sourceTree = "<group>"; };
+		559B0F0713363AAC00180E4E /* NewEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEntryViewController.xib; sourceTree = "<group>"; };
+		559B0F1113363DA300180E4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		559B0F151336A90000180E4E /* BrushScriptStd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrushScriptStd.ttf; sourceTree = "<group>"; };
+		559B0F1713375F2200180E4E /* EditEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditEntryViewController.xib; sourceTree = "<group>"; };
 		55B9DBBA132B8E260011585E /* NewEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEntryViewController.h; sourceTree = "<group>"; };
 		55B9DBBB132B8E270011585E /* NewEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEntryViewController.m; sourceTree = "<group>"; };
 		55BDEFA6133201E9005A89D4 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
@@ -87,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559B0F1213363DA300180E4E /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
@@ -100,8 +120,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				55BDEF9C13320007005A89D4 /* Models */,
+				559B0F0313363A4400180E4E /* Views */,
 				5589271913278E1500E1E293 /* vendor */,
+				55BDEF9C13320007005A89D4 /* Models */,
 				55B9DBB8132A6E410011585E /* controllers */,
 				1D3623240D0F684500981E51 /* FoodReminderAppDelegate.h */,
 				1D3623250D0F684500981E51 /* FoodReminderAppDelegate.m */,
@@ -141,9 +162,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				559B0F151336A90000180E4E /* BrushScriptStd.ttf */,
+				559B0EEC1336092C00180E4E /* Images */,
+				5594239D13357489007039F3 /* MainWindow.xib */,
 				28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */,
-				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* FoodReminder-Info.plist */,
+				559B0EEF13360AF900180E4E /* EntriesViewController.xib */,
+				559B0F0713363AAC00180E4E /* NewEntryViewController.xib */,
+				559B0F1713375F2200180E4E /* EditEntryViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -151,21 +177,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				559B0F1113363DA300180E4E /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 				28860BE40F44EE6400985440 /* CoreData.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5526AF3E132CDCB6000EB6DC /* GradientButton */ = {
-			isa = PBXGroup;
-			children = (
-				5526AF3F132CDCB6000EB6DC /* GradientButton.h */,
-				5526AF40132CDCB6000EB6DC /* GradientButton.m */,
-			);
-			path = GradientButton;
 			sourceTree = "<group>";
 		};
 		5526B010132D078A000EB6DC /* NSStringExtensions */ = {
@@ -182,7 +200,6 @@
 			children = (
 				55BDEFA9133202A6005A89D4 /* DateCalculations */,
 				5526B010132D078A000EB6DC /* NSStringExtensions */,
-				5526AF3E132CDCB6000EB6DC /* GradientButton */,
 				5589271B13278E7600E1E293 /* Sensible TableView */,
 			);
 			name = vendor;
@@ -214,6 +231,25 @@
 			path = "Sensible TableView";
 			sourceTree = "<group>";
 		};
+		559B0EEC1336092C00180E4E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				559B0EF51336211100180E4E /* addProducts.png */,
+				559B0EF313361CA500180E4E /* tableBackground.png */,
+				559B0EF113361A7300180E4E /* background.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		559B0F0313363A4400180E4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				559B0F0413363A6200180E4E /* ClassyButton.h */,
+				559B0F0513363A6200180E4E /* ClassyButton.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		55B9DBB8132A6E410011585E /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +259,8 @@
 				55B9DBBB132B8E270011585E /* NewEntryViewController.m */,
 				5526B01E132E633A000EB6DC /* EditEntryViewController.h */,
 				5526B01F132E633D000EB6DC /* EditEntryViewController.m */,
+				5532DF7C1335148500E30A3C /* SettingsViewController.h */,
+				5532DF7D1335148600E30A3C /* SettingsViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -295,8 +333,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */,
+				5594239E13357489007039F3 /* MainWindow.xib in Resources */,
+				559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */,
+				559B0EF213361A7300180E4E /* background.png in Resources */,
+				559B0EF413361CA500180E4E /* tableBackground.png in Resources */,
+				559B0EF61336211100180E4E /* addProducts.png in Resources */,
+				559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */,
+				559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */,
+				559B0F1813375F2200180E4E /* EditEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,11 +366,12 @@
 				5589273813278E7600E1E293 /* SCViewController.m in Sources */,
 				5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */,
 				55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */,
-				5526AF41132CDCB6000EB6DC /* GradientButton.m in Sources */,
 				5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */,
 				5526B020132E6340000EB6DC /* EditEntryViewController.m in Sources */,
 				55BDEFA8133201E9005A89D4 /* Entry.m in Sources */,
 				55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */,
+				5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */,
+				559B0F0613363A6200180E4E /* ClassyButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

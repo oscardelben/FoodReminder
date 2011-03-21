@@ -8,20 +8,21 @@
 
 #import "NewEntryViewController.h"
 #import "FoodReminderAppDelegate.h"
-#import "GradientButton.h"
 #import "NSString+DBExtensions.h"
 
 @implementation NewEntryViewController
 
 @synthesize parentController;
+@synthesize tableView;
+@synthesize saveButton, saveAndCreateButton;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         managedObjectContext = 
 		[(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-        
+
         entry = [NSEntityDescription insertNewObjectForEntityForName:@"Entry" inManagedObjectContext:managedObjectContext];
         [entry setValue:[NSDate date] forKey:@"due_to"];
     }
@@ -32,11 +33,11 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    [cancelButton release];
+    self.navigationController.navigationBarHidden = YES;
     
-    self.title = @"New Entry";
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorColor = [UIColor blackColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
@@ -51,35 +52,28 @@
     
     // Due To
     SCDateCell *dateCell = [SCDateCell cellWithText:@"Due to" withBoundObject:entry withDatePropertyName:@"due_to"];
+    dateCell.datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+    dateCell.dateFormatter = dateFormatter;
     [section addCell:dateCell];
     
     // buttons
     
-    UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    
-    button1 = [[GradientButton alloc] initWithFrame:CGRectMake(20, 10, 120, 30)];
-    [button1 useBlackStyle];
-    button1.hidden = YES;
-    [button1 setTitle:@"Save" forState:UIControlStateNormal];
-    [button1 addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
-    [buttonsView addSubview:button1];
-    
-    button2 = [[GradientButton alloc] initWithFrame:CGRectMake(180, 10, 120, 30)];
-    [button2 useBlackStyle];
-    button2.hidden = YES;
-    [button2 setTitle:@"Add New" forState:UIControlStateNormal];
-    [button2 addTarget:self action:@selector(saveAndCreateNew) forControlEvents:UIControlEventTouchUpInside];
-    [buttonsView addSubview:button2];
-    
-    section.footerView = buttonsView;
-    [buttonsView release];
+    saveButton.hidden = YES;
+    saveAndCreateButton.hidden = YES;
 }
 
 - (void)dealloc
 {
     [tableModel release];
-    [button1 release];
-    [button2 release];
+    [tableView release];
+    [saveButton release];
+    [saveAndCreateButton release];
+    
     [super dealloc];
 }
 
@@ -90,7 +84,7 @@
     return (name && ![name blank]);
 }
 
-- (void)save
+- (IBAction)save:(id)sender;
 {
     if (![self valid])
         [managedObjectContext deleteObject:entry];
@@ -99,7 +93,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)saveAndCreateNew
+- (IBAction)saveAndCreateNew:(id)sender;
 {
     if (![self valid])
         [managedObjectContext deleteObject:entry];
@@ -109,7 +103,7 @@
     [parentController performSelector:@selector(createNewEntryWithCurlAnimation)];
 }
 
-- (void)cancel
+- (IBAction)cancel:(id)sender;
 {
     [managedObjectContext deleteObject:entry];
     
@@ -121,19 +115,25 @@
 #pragma mark -
 #pragma mark SCTableViewModelDelegate methods
 
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableBackground"]];
+    cell.textLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+}
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BOOL valid = [self valid];
 
-    if (valid && button1.hidden)
+    if (valid && saveButton.hidden)
     {
-        button1.hidden = NO;
-        button2.hidden = NO;
+        saveButton.hidden = NO;
+        saveAndCreateButton.hidden = NO;
     }
-    else if (!valid && !button1.hidden)
+    else if (!valid && !saveButton.hidden)
     {
-        button1.hidden = YES;
-        button2.hidden = YES;
+        saveButton.hidden = YES;
+        saveAndCreateButton.hidden = YES;
     }
 }
 

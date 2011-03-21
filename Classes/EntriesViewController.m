@@ -10,19 +10,22 @@
 #import "FoodReminderAppDelegate.h"
 #import "NewEntryViewController.h"
 #import "EditEntryViewController.h"
+#import "SettingsViewController.h"
 
 @implementation EntriesViewController
+
+@synthesize tableView;
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
-	self.title = @"Food Reminder";
+    [super viewDidLoad];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addEntry)];
-    
-    self.navigationItem.rightBarButtonItem = addButton;
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorColor = [UIColor blackColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
 	NSManagedObjectContext *managedObjectContext = 
         [(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -33,7 +36,7 @@
 
     // order
     entryDef.keyPropertyName = @"due_to";
-
+    
     // table model    
 	tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
     tableModel.delegate = self;
@@ -46,14 +49,13 @@
 
 - (void)dealloc {	
 	[tableModel release];
+    [tableView release];
     [super dealloc];
 }
 
-- (void)addEntry
+- (void)showSettings
 {
-    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    viewController.parentController = self;
-    
+    SettingsViewController *viewController = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
     [self.navigationController presentModalViewController:navController animated:YES];
@@ -62,9 +64,20 @@
     [navController release];
 }
 
+- (IBAction)addEntry:(id)sender;
+{
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithNibName:@"NewEntryViewController" bundle:nil];
+    viewController.parentController = self;
+    
+    [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentModalViewController:viewController animated:YES];
+
+    [viewController release];
+}
+
 - (void)createNewEntryWithCurlAnimation
 {
-    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithNibName:@"NewEntryViewController" bundle:nil];
     viewController.parentController = self;
     
     UINavigationController *detailNavController = [[UINavigationController alloc] 
@@ -91,16 +104,20 @@
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableBackground"]];
+    cell.textLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+    
     // Detail Text Label
     SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
 																   sectionAtIndex:indexPath.section];
 	NSManagedObject *entry = [section.items objectAtIndex:indexPath.row];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     
     cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
+    cell.detailTextLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
 }
 
 
@@ -110,7 +127,7 @@
 																   sectionAtIndex:indexPath.section];
 	NSManagedObject *entry = [section.items objectAtIndex:indexPath.row];
     
-    EditEntryViewController *editViewController = [[EditEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    EditEntryViewController *editViewController = [[EditEntryViewController alloc] initWithNibName:@"EditEntryViewController" bundle:nil];
     editViewController.entry = entry;
     editViewController.parentController = self;
     

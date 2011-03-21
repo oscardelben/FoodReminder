@@ -8,17 +8,18 @@
 
 #import "EditEntryViewController.h"
 #import "FoodReminderAppDelegate.h"
-#import "GradientButton.h"
 #import "NSString+DBExtensions.h"
 
 @implementation EditEntryViewController
 
+@synthesize tableView;
+@synthesize doneButton;
 @synthesize entry;
 @synthesize parentController;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         managedObjectContext = 
 		[(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -37,17 +38,16 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
-    
-    if (![self valid]) {
-        self.navigationItem.rightBarButtonItem.enabled = NO;
-    }
-    
     self.navigationItem.hidesBackButton = YES;
     
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.separatorColor = [UIColor blackColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
     self.title = @"Edit Entry";
+    
+    if (![self valid])
+        doneButton.hidden = YES;
     
     // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
@@ -63,29 +63,17 @@
     // Due To
     SCDateCell *dateCell = [SCDateCell cellWithText:@"Due to" withBoundObject:entry withDatePropertyName:@"due_to"];
     [section addCell:dateCell];
-    
-    // buttons
-    
-    UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    
-    button1 = [[GradientButton alloc] initWithFrame:CGRectMake(20, 10, 120, 30)];
-    [button1 useRedDeleteStyle];
-    [button1 setTitle:@"Delete" forState:UIControlStateNormal];
-    [button1 addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
-    [buttonsView addSubview:button1];
-    
-    section.footerView = buttonsView;
-    [buttonsView release];
 }
 
 - (void)dealloc
 {
     [tableModel release];
-    [button1 release];
+    [tableView release];
+    [doneButton release];
     [super dealloc];
 }
 
-- (void)save
+- (IBAction)save:(id)sender;
 {
     if ([self valid]) {
         [parentController performSelector:@selector(reloadEntries)];
@@ -93,7 +81,7 @@
     }
 }
 
-- (void)remove
+- (IBAction)remove:(id)sender;
 {
     [managedObjectContext deleteObject:entry];
     
@@ -104,12 +92,18 @@
 #pragma mark -
 #pragma mark SCTableViewModelDelegate methods
 
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableBackground"]];
+    cell.textLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+}
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self valid])
-        self.navigationItem.rightBarButtonItem.enabled = YES;
+        doneButton.hidden = YES;
     else
-        self.navigationItem.rightBarButtonItem.enabled = NO;
+        doneButton.hidden = NO;
 }
 
 @end

@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "SCTableViewModel.h"
 
-@interface EntriesViewController : UITableViewController <SCTableViewModelDelegate> {
+@interface EntriesViewController : UIViewController <SCTableViewModelDelegate> {
 	SCTableViewModel *tableModel;
 }
 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+
 - (void)reloadEntries;
+- (IBAction)addEntry:(id)sender;
 
 @end

@@ -9,17 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "SCTableViewModel.h"
 
-@class GradientButton;
-
-@interface EditEntryViewController : UITableViewController <SCTableViewModelDelegate> {
+@interface EditEntryViewController : UIViewController <SCTableViewModelDelegate> {
     SCTableViewModel *tableModel;
     
     NSManagedObjectContext *managedObjectContext;
-    
-    GradientButton *button1;
 }
 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIButton *doneButton;
 @property (nonatomic, retain) NSManagedObject *entry;
 @property (nonatomic, retain) id parentController;
+
+- (IBAction)save:(id)sender;
+- (IBAction)remove:(id)sender;
 
 @end
