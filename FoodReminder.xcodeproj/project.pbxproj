@@ -16,6 +16,7 @@
 		28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */; };
 		5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B012132D078B000EB6DC /* NSString+DBExtensions.m */; };
 		5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532DF7D1335148600E30A3C /* SettingsViewController.m */; };
+		5534856C1338ED7C00816A66 /* TitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5534856B1338ED7C00816A66 /* TitleButton.m */; };
 		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
 		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
 		5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272013278E7600E1E293 /* SCClassDefinition.m */; };
@@ -31,7 +32,6 @@
 		559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EEF13360AF900180E4E /* EntriesViewController.xib */; };
 		559B0EF213361A7300180E4E /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF113361A7300180E4E /* background.png */; };
 		559B0EF413361CA500180E4E /* tableBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF313361CA500180E4E /* tableBackground.png */; };
-		559B0EF61336211100180E4E /* addProducts.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF51336211100180E4E /* addProducts.png */; };
 		559B0F0613363A6200180E4E /* ClassyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B0F0513363A6200180E4E /* ClassyButton.m */; };
 		559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F0713363AAC00180E4E /* NewEntryViewController.xib */; };
 		559B0F1213363DA300180E4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559B0F1113363DA300180E4E /* QuartzCore.framework */; };
@@ -56,6 +56,8 @@
 		5526B012132D078B000EB6DC /* NSString+DBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DBExtensions.m"; sourceTree = "<group>"; };
 		5532DF7C1335148500E30A3C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		5532DF7D1335148600E30A3C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		5534856A1338ED7C00816A66 /* TitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleButton.h; sourceTree = "<group>"; };
+		5534856B1338ED7C00816A66 /* TitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleButton.m; sourceTree = "<group>"; };
 		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
 		5589271D13278E7600E1E293 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
 		5589271E13278E7600E1E293 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
@@ -81,7 +83,6 @@
 		559B0EEF13360AF900180E4E /* EntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntriesViewController.xib; sourceTree = "<group>"; };
 		559B0EF113361A7300180E4E /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		559B0EF313361CA500180E4E /* tableBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableBackground.png; sourceTree = "<group>"; };
-		559B0EF51336211100180E4E /* addProducts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addProducts.png; sourceTree = "<group>"; };
 		559B0F0413363A6200180E4E /* ClassyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassyButton.h; sourceTree = "<group>"; };
 		559B0F0513363A6200180E4E /* ClassyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassyButton.m; sourceTree = "<group>"; };
 		559B0F0713363AAC00180E4E /* NewEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEntryViewController.xib; sourceTree = "<group>"; };
@@ -228,7 +229,6 @@
 		559B0EEC1336092C00180E4E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				559B0EF51336211100180E4E /* addProducts.png */,
 				559B0EF313361CA500180E4E /* tableBackground.png */,
 				559B0EF113361A7300180E4E /* background.png */,
 			);
@@ -240,6 +240,8 @@
 			children = (
 				559B0F0413363A6200180E4E /* ClassyButton.h */,
 				559B0F0513363A6200180E4E /* ClassyButton.m */,
+				5534856A1338ED7C00816A66 /* TitleButton.h */,
+				5534856B1338ED7C00816A66 /* TitleButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -330,7 +332,6 @@
 				559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */,
 				559B0EF213361A7300180E4E /* background.png in Resources */,
 				559B0EF413361CA500180E4E /* tableBackground.png in Resources */,
-				559B0EF61336211100180E4E /* addProducts.png in Resources */,
 				559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */,
 				559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */,
 			);
@@ -362,6 +363,7 @@
 				55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */,
 				5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */,
 				559B0F0613363A6200180E4E /* ClassyButton.m in Sources */,
+				5534856C1338ED7C00816A66 /* TitleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

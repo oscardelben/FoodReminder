@@ -9,7 +9,6 @@
 #import "EntriesViewController.h"
 #import "FoodReminderAppDelegate.h"
 #import "NewEntryViewController.h"
-#import "EditEntryViewController.h"
 #import "SettingsViewController.h"
 
 @implementation EntriesViewController

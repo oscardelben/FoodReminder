@@ -9,6 +9,7 @@
 #import "NewEntryViewController.h"
 #import "FoodReminderAppDelegate.h"
 #import "NSString+DBExtensions.h"
+#import "ClassyButton.h"
 
 @implementation NewEntryViewController
 
@@ -29,6 +30,17 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [tableModel release];
+    [tableView release];
+    [saveButton release];
+    [saveAndCreateButton release];
+    
+    [super dealloc];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,17 +53,20 @@
     
     // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
-    tableModel.delegate = self;
+    //tableModel.delegate = self;
     
     SCTableViewSection *section = [SCTableViewSection section];
     [tableModel addSection:section];
     
     // Name
     SCTextFieldCell *nameCell = [SCTextFieldCell cellWithText:@"Name" withBoundObject:entry withPropertyName:@"name"];
+    nameCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:20];
+    nameCell.textField.textAlignment = UITextAlignmentRight;
     [section addCell:nameCell];
     
     // Due To
     SCDateCell *dateCell = [SCDateCell cellWithText:@"Due to" withBoundObject:entry withDatePropertyName:@"due_to"];
+    dateCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:20];
     dateCell.datePicker.datePickerMode = UIDatePickerModeDate;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -63,19 +78,26 @@
     
     // buttons
     
+    UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    
+    saveButton = [[ClassyButton alloc] initWithFrame:CGRectMake(21, 10, 120, 30)];
+    saveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     saveButton.hidden = YES;
+    [saveButton setTitle:@"Save" forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    [buttonsView addSubview:saveButton];
+    
+    saveAndCreateButton = [[ClassyButton alloc] initWithFrame:CGRectMake(180, 10, 120, 30)];
+    saveAndCreateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     saveAndCreateButton.hidden = YES;
+    [saveAndCreateButton setTitle:@"Save & New" forState:UIControlStateNormal];
+    [saveAndCreateButton addTarget:self action:@selector(saveAndCreateNew) forControlEvents:UIControlEventTouchUpInside];
+    [buttonsView addSubview:saveAndCreateButton];
+    
+    section.footerView = buttonsView;
+    [buttonsView release];
 }
 
-- (void)dealloc
-{
-    [tableModel release];
-    [tableView release];
-    [saveButton release];
-    [saveAndCreateButton release];
-    
-    [super dealloc];
-}
 
 - (BOOL)valid
 {
@@ -84,7 +106,7 @@
     return (name && ![name blank]);
 }
 
-- (IBAction)save:(id)sender;
+- (IBAction)save;
 {
     if (![self valid])
         [managedObjectContext deleteObject:entry];
@@ -93,7 +115,7 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)saveAndCreateNew:(id)sender;
+- (IBAction)saveAndCreateNew;
 {
     if (![self valid])
         [managedObjectContext deleteObject:entry];
@@ -125,12 +147,12 @@
 {
     BOOL valid = [self valid];
 
-    if (valid && saveButton.hidden)
+    if (valid)
     {
         saveButton.hidden = NO;
         saveAndCreateButton.hidden = NO;
     }
-    else if (!valid && !saveButton.hidden)
+    else
     {
         saveButton.hidden = YES;
         saveAndCreateButton.hidden = YES;

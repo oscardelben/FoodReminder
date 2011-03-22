@@ -15,10 +15,6 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-//    self.layer.backgroundColor = [[UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1] CGColor];
-//    self.layer.borderColor = [[UIColor blackColor] CGColor];
-//    self.layer.borderWidth = 1;
-//    self.layer.cornerRadius = 10;
     self.titleLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:20];
     self.titleLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
 }

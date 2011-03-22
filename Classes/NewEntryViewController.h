@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SCTableViewModel.h"
 
+@class ClassyButton;
+
 @interface NewEntryViewController : UIViewController <SCTableViewModelDelegate> {
     NSManagedObject *entry;
     
@@ -19,11 +21,11 @@
 
 @property (nonatomic, retain) id parentController;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIButton *saveButton;
-@property (nonatomic, retain) IBOutlet UIButton *saveAndCreateButton;
+@property (nonatomic, retain) ClassyButton *saveButton;
+@property (nonatomic, retain) ClassyButton *saveAndCreateButton;
 
 - (IBAction)cancel:(id)sender;
-- (IBAction)save:(id)sender;
-- (IBAction)saveAndCreateNew:(id)sender;
+- (IBAction)save;
+- (IBAction)saveAndCreateNew;
 
 @end
