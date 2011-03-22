@@ -15,7 +15,6 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */; };
 		5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B012132D078B000EB6DC /* NSString+DBExtensions.m */; };
-		5526B020132E6340000EB6DC /* EditEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B01F132E633D000EB6DC /* EditEntryViewController.m */; };
 		5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532DF7D1335148600E30A3C /* SettingsViewController.m */; };
 		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
 		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
@@ -37,7 +36,6 @@
 		559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F0713363AAC00180E4E /* NewEntryViewController.xib */; };
 		559B0F1213363DA300180E4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559B0F1113363DA300180E4E /* QuartzCore.framework */; };
 		559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F151336A90000180E4E /* BrushScriptStd.ttf */; };
-		559B0F1813375F2200180E4E /* EditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F1713375F2200180E4E /* EditEntryViewController.xib */; };
 		55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBBB132B8E270011585E /* NewEntryViewController.m */; };
 		55BDEFA8133201E9005A89D4 /* Entry.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFA7133201E9005A89D4 /* Entry.m */; };
 		55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDEFAB133202A6005A89D4 /* NSDate+Calculations.m */; };
@@ -56,8 +54,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5526B011132D078B000EB6DC /* NSString+DBExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DBExtensions.h"; sourceTree = "<group>"; };
 		5526B012132D078B000EB6DC /* NSString+DBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DBExtensions.m"; sourceTree = "<group>"; };
-		5526B01E132E633A000EB6DC /* EditEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEntryViewController.h; sourceTree = "<group>"; };
-		5526B01F132E633D000EB6DC /* EditEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEntryViewController.m; sourceTree = "<group>"; };
 		5532DF7C1335148500E30A3C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		5532DF7D1335148600E30A3C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
@@ -91,7 +87,6 @@
 		559B0F0713363AAC00180E4E /* NewEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEntryViewController.xib; sourceTree = "<group>"; };
 		559B0F1113363DA300180E4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		559B0F151336A90000180E4E /* BrushScriptStd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrushScriptStd.ttf; sourceTree = "<group>"; };
-		559B0F1713375F2200180E4E /* EditEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditEntryViewController.xib; sourceTree = "<group>"; };
 		55B9DBBA132B8E260011585E /* NewEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEntryViewController.h; sourceTree = "<group>"; };
 		55B9DBBB132B8E270011585E /* NewEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEntryViewController.m; sourceTree = "<group>"; };
 		55BDEFA6133201E9005A89D4 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
@@ -169,7 +164,6 @@
 				8D1107310486CEB800E47090 /* FoodReminder-Info.plist */,
 				559B0EEF13360AF900180E4E /* EntriesViewController.xib */,
 				559B0F0713363AAC00180E4E /* NewEntryViewController.xib */,
-				559B0F1713375F2200180E4E /* EditEntryViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -257,8 +251,6 @@
 				5589275B1327927A00E1E293 /* EntriesViewController.m */,
 				55B9DBBA132B8E260011585E /* NewEntryViewController.h */,
 				55B9DBBB132B8E270011585E /* NewEntryViewController.m */,
-				5526B01E132E633A000EB6DC /* EditEntryViewController.h */,
-				5526B01F132E633D000EB6DC /* EditEntryViewController.m */,
 				5532DF7C1335148500E30A3C /* SettingsViewController.h */,
 				5532DF7D1335148600E30A3C /* SettingsViewController.m */,
 			);
@@ -341,7 +333,6 @@
 				559B0EF61336211100180E4E /* addProducts.png in Resources */,
 				559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */,
 				559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */,
-				559B0F1813375F2200180E4E /* EditEntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +358,6 @@
 				5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */,
 				55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */,
 				5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */,
-				5526B020132E6340000EB6DC /* EditEntryViewController.m in Sources */,
 				55BDEFA8133201E9005A89D4 /* Entry.m in Sources */,
 				55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */,
 				5532DF7E1335148600E30A3C /* SettingsViewController.m in Sources */,

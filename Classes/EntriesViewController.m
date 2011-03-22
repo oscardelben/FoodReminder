@@ -104,6 +104,9 @@
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    cell.selectionStyle = UITableViewCellEditingStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
     cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tableBackground"]];
     cell.textLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
     
@@ -116,11 +119,18 @@
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     
-    cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
-    cell.detailTextLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+    //cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
+    //cell.detailTextLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+    
+    SCBadgeView *badge = [[SCBadgeView alloc] init];
+    cell.badgeView.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
+    cell.badgeView.color = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+    //cell.badgeView.font = [UIFont fontWithName:@"Helvetica" size:12];
+    cell.highlighted = YES;
+    [badge release];
 }
 
-
+/*
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
@@ -134,5 +144,6 @@
     [self.navigationController pushViewController:editViewController animated:YES];
     [editViewController release];
 }
+*/
 
 @end

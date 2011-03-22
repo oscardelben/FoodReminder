@@ -65,7 +65,7 @@
 		{
 			UITableViewCell *ownerCell = (UITableViewCell *)spview;
 			
-			if(ownerCell.highlighted || ownerCell.selected)
+			if((ownerCell.highlighted || ownerCell.selected) && ownerCell.selectionStyle != UITableViewCellEditingStyleNone)
 				badgeColor = [UIColor whiteColor];
 			
 			break;
@@ -100,7 +100,7 @@
 - (void)setColor:(UIColor *)_color
 {
 	[color release];
-	color = [_color copy];
+	color = [_color retain];
 	
 	[self setNeedsDisplay];
 }
