@@ -13,6 +13,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [self setTitleColor:[UIColor colorWithRed:96/255.0 green:62/255.0 blue:44/255.0 alpha:1] forState:UIControlStateHighlighted];
+
     self.titleLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:30];
     self.titleLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
 }

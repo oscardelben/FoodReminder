@@ -9,7 +9,6 @@
 #import "EntriesViewController.h"
 #import "FoodReminderAppDelegate.h"
 #import "NewEntryViewController.h"
-#import "SettingsViewController.h"
 
 @implementation EntriesViewController
 
@@ -55,17 +54,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
-}
-
-- (void)showSettings
-{
-    SettingsViewController *viewController = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    
-    [self.navigationController presentModalViewController:navController animated:YES];
-    
-    [viewController release];
-    [navController release];
 }
 
 - (IBAction)addEntry:(id)sender;
