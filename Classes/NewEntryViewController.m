@@ -41,6 +41,11 @@
 }
 
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,7 +92,7 @@
     [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:saveButton];
     
-    saveAndCreateButton = [[ClassyButton alloc] initWithFrame:CGRectMake(180, 10, 120, 30)];
+    saveAndCreateButton = [[ClassyButton alloc] initWithFrame:CGRectMake(160, 10, 140, 30)];
     saveAndCreateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     saveAndCreateButton.hidden = YES;
     [saveAndCreateButton setTitle:@"Save & New" forState:UIControlStateNormal];
