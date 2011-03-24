@@ -101,6 +101,17 @@
     
     section.footerView = buttonsView;
     [buttonsView release];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    
+    ClassyButton *cancelButton = [[ClassyButton alloc] initWithFrame:CGRectMake(17, 10, 74, 37)];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [headerView addSubview:cancelButton];
+    
+    section.headerView = headerView;
+    [cancelButton release];
 }
 
 
