@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -40,12 +40,11 @@
 @synthesize buttonsToolbar;
 @synthesize cancelButtonTapped;
 @synthesize doneButtonTapped;
+@synthesize state;
 
 
 - (id)init
 {
-	[super init];
-	
 	if( self = [super init] )
 	{
 		toolbarAdded = FALSE;
@@ -64,6 +63,8 @@
 		
 		cancelButtonTapped = FALSE;
 		doneButtonTapped = FALSE;
+		
+		state = SCViewControllerStateNew;
 	}
 	
 	return self;
@@ -103,11 +104,16 @@
 	{
 		[self.delegate viewControllerDidAppear:self];
 	}
+	
+	state = SCViewControllerStateActive;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+	
+	if(state != SCViewControllerStateDismissed)
+		state = SCViewControllerStateInactive;
 	
 	if([self.delegate conformsToProtocol:@protocol(SCViewControllerDelegate)]
 	   && [self.delegate respondsToSelector:
@@ -159,11 +165,23 @@
 	{
 		[self.delegate viewControllerWillAppear:self];
 	}
+	
+	if(state != SCViewControllerStateNew)
+		state = SCViewControllerStateActive;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+	
+	if(self.navigationController)
+	{
+		if([self.navigationController.viewControllers indexOfObject:self] == NSNotFound)
+		{
+			// self has been popped from the navigation controller
+			state = SCViewControllerStateDismissed;
+		}
+	}
 	
 	if([self.delegate conformsToProtocol:@protocol(SCViewControllerDelegate)]
 	   && [self.delegate respondsToSelector:
@@ -305,6 +323,8 @@
 {
 	cancelButtonTapped = cancelValue;
 	doneButtonTapped = doneValue;
+	
+	state = SCViewControllerStateDismissed;
 	
 	if(self.navigationController)
 	{

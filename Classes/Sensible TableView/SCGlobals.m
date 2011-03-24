@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -21,6 +21,7 @@
 
 #import "SCGlobals.h"
 #import "SCClassDefinition.h"
+#import "SCTableViewModel.h"
 
 
 @implementation SCHelper
@@ -44,7 +45,9 @@
 	BOOL inPopover = FALSE;
 	while (view.superview)
 	{
-		if (strcmp(object_getClassName(view.superview), "UIPopoverView"))
+		NSString *sviewClassName = [NSString stringWithCString:object_getClassName(view.superview)
+													  encoding:NSUnicodeStringEncoding];
+		if([sviewClassName isEqualToString:@"UIPopoverView"])
 		{
 			inPopover = TRUE;
 			break;
@@ -137,6 +140,9 @@
 {
 	NSObject *value = [SCHelper valueForPropertyName:propertyName inObject:object];
 	
+	if(!value)
+		return nil;
+	
 	NSMutableString *stringValue = [NSMutableString string];
 	if([value isKindOfClass:[NSArray class]])
 	{
@@ -162,6 +168,108 @@
 }
 
 @end
+
+
+
+
+
+@interface SCModelCenter ()
+
+- (void)registerForKeyboardNotifications;
+- (void)unregisterKeyboardNotifications;
+- (void)keyboardWillShow:(NSNotification *)aNotification;
+- (void)keyboardWillHide:(NSNotification *)aNotification;
+
+@end
+
+@implementation SCModelCenter
+
+@synthesize keyboardIssuer;
+
+
++ (SCModelCenter *)sharedModelCenter
+{
+	static SCModelCenter *_sharedModelCenter = nil;
+	
+	@synchronized(self)
+	{
+		if(!_sharedModelCenter)
+			_sharedModelCenter = [[SCModelCenter alloc] init];
+	}
+	
+	return _sharedModelCenter;
+}
+
+- (id) init
+{
+	if( (self = [super init]) )
+	{
+		keyboardIssuer = nil;
+		[self registerForKeyboardNotifications];
+		
+		modelsArray = [[NSMutableArray alloc] init];
+	}
+	
+	return self;
+}
+
+- (void) dealloc
+{
+	[self unregisterKeyboardNotifications];
+	[modelsArray release];
+	
+	[super dealloc];
+}
+
+- (void)registerForKeyboardNotifications
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) 
+												 name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) 
+												 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)unregisterKeyboardNotifications
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+	if(!self.keyboardIssuer)
+		return;
+	
+	for(SCTableViewModel *model in modelsArray)
+		if(model.viewController == self.keyboardIssuer)
+			[model keyboardWillShow:aNotification];
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+	if(!self.keyboardIssuer)
+		return;
+	
+	for(SCTableViewModel *model in modelsArray)
+		if(model.viewController == self.keyboardIssuer)
+			[model keyboardWillHide:aNotification];
+}
+
+
+
+- (void)registerModel:(SCTableViewModel *)model
+{
+	[modelsArray addObject:model];
+}
+
+- (void)unregisterModel:(SCTableViewModel *)model
+{
+	[modelsArray removeObjectIdenticalTo:model];
+}
+
+
+@end
+
+
 
 
 

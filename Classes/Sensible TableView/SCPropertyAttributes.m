@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -307,10 +307,21 @@
 @implementation SCDateAttributes
 
 @synthesize dateFormatter;
+@synthesize datePickerMode;
+@synthesize displayDatePickerInDetailView;
 
 + (id)attributesWithDateFormatter:(NSDateFormatter *)formatter
 {
 	return [[[[self class] alloc] initWithDateFormatter:formatter] autorelease];
+}
+
++ (id)attributesWithDateFormatter:(NSDateFormatter *)formatter
+				   datePickerMode:(UIDatePickerMode)mode
+	displayDatePickerInDetailView:(BOOL)inDetailView
+{
+	return [[[[self class] alloc] initWithDateFormatter:formatter
+										 datePickerMode:mode
+						  displayDatePickerInDetailView:inDetailView] autorelease];
 }
 
 - (id)init
@@ -318,6 +329,8 @@
 	if( (self = [super init]) )
 	{
 		dateFormatter = nil;		// will be ignored
+		datePickerMode = UIDatePickerModeDateAndTime;
+		displayDatePickerInDetailView = FALSE;
 	}
 	return self;
 }
@@ -327,6 +340,19 @@
 	if([self init])
 	{
 		self.dateFormatter = formatter;
+	}
+	return self;
+}
+
+- (id)initWithDateFormatter:(NSDateFormatter *)formatter
+			 datePickerMode:(UIDatePickerMode)mode
+	displayDatePickerInDetailView:(BOOL)inDetailView
+{
+	if([self init])
+	{
+		self.dateFormatter = formatter;
+		self.datePickerMode = mode;
+		self.displayDatePickerInDetailView = inDetailView;
 	}
 	return self;
 }

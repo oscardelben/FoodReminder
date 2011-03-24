@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -47,7 +47,10 @@
  *	An %SCTableViewModel defines a table view model with several sections, each section being of type 
  *	SCTableViewSection. Each SCTableViewSection can contain several cells, each cell being of type
  *	SCTableViewCell. %SCTableViewModel's functionality can also be extended using 
- *	SCTableViewModelDataSource and SCTableViewModelDelegate
+ *	SCTableViewModelDataSource and SCTableViewModelDelegate.
+ *
+ *	If "Editing Mode" sections are added, they will replace the model's normal sections when the table view
+ *	is put into editing mode. For this to happen automatically, 
  */
 
 @interface SCTableViewModel : NSObject <UITableViewDataSource, UITableViewDelegate>
@@ -56,7 +59,6 @@
 	id target;
 	SEL action;
 	SCTableViewModel *masterModel;
-	id viewControllerDelegate;
 	
 	UITableView *modeledTableView;
 	UIViewController *viewController;
@@ -64,10 +66,12 @@
 	id delegate;
 	UIBarButtonItem *editButtonItem;
 	BOOL autoResizeForKeyboard;
-	BOOL autoResizeStatus;
 	BOOL keyboardShown;
 	CGFloat keyboardOverlap;
+	
 	NSMutableArray *sections;
+	NSMutableArray *editingModeSections;
+	
 	NSArray *sectionIndexTitles;
 	BOOL autoGenerateSectionIndexTitles;
 	BOOL autoSortSections;
@@ -115,8 +119,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 /*!	When set to a valid UIBarButtonItem, SCTableViewModel automatically puts its table view
- *	in edit mode when the button is tapped. Note: Not required if your view controller is a UITableViewController 
- *	subclass, or if you do not wish to implement editing specific SCTableViewModelDelegate methods. */
+ *	in edit mode when the button is tapped. Note: Must be set if the model is to automatically
+ *	show/hide editing mode sections. */
 @property (nonatomic, retain) UIBarButtonItem *editButtonItem;
 
 /*! If TRUE, %SCTableViewModel will automatically resize the modeledTableView when the
@@ -133,8 +137,9 @@
  *	the first letter of each section's header title. Default: FALSE. */
 @property (nonatomic, readwrite) BOOL autoGenerateSectionIndexTitles;
 
-/*! If TRUE, %SCTableViewModel will automatically sort its sections according to their header
- *	title value. Default: FALSE. */
+/*! If TRUE, %SCTableViewModel will automatically sort its sections alphabetically according to their header
+ *	title value. To provide custom section sorting, implement the tableViewModel:sortSections: 
+ *	SCTableViewDataSource method instead. Default: FALSE. */
 @property (nonatomic, readwrite) BOOL autoSortSections;
 
 /*! If TRUE, all section header titles will be hidden. Default: FALSE. */
@@ -147,15 +152,6 @@
 /*! An integer that you can use to identify different table view models in your application. */
 @property (nonatomic, readwrite) NSInteger tag;
 
-/*! Pauses auto resizing when keyboard appears. This method should be called before displaying
- *	any of your own detail view controllers on top of the model's view controller. This is to disable
- *	the model from processing and acting to keyboard notifications. */
-- (void)pauseAutoResizeForKeyboard;
-
-/*! Resumes auto resizing if autoResizeForKeyboard was TRUE at the time pauseAutoResizeForKeyboard
- *	was called, otherwise it does nothing. Method should be called after your own detail controller
- *	disappears. This method should only be called if pauseAutoResizeForKeyboard was called first. */
- - (void)resumeAutoResizeForKeyboard;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /// @name Managing Sections
@@ -243,16 +239,6 @@
 - (void)reloadBoundValues;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-/// @name Managing Custom Detail Views
-//////////////////////////////////////////////////////////////////////////////////////////
-
-/*! Method *must* be called before a custom detail view appears. */
-- (void)prepareModelForCustomDetailViewAppearing;
-
-/*! Method *must* be called before a custom detail view disappears. */
-- (void)prepareModelForCustomDetailViewDisappearing;
-
-//////////////////////////////////////////////////////////////////////////////////////////
 /// @name Managing the Data Source and Delegate
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,6 +272,12 @@
 /*! Property is used internally by the framework to set the master model in a master-detail 
 	relationship. */
 @property (nonatomic, assign) SCTableViewModel *masterModel;
+
+/*! Warning: Method must only be called internally by the framework. */
+- (void)keyboardWillShow:(NSNotification *)aNotification;
+
+/*! Warning: Method must only be called internally by the framework. */
+- (void)keyboardWillHide:(NSNotification *)aNotification;
 
 /*! Method gets called internally whenever the value of a section changes. This method 
  *	should only be used when subclassing %SCTableViewModel. If what you want is to get notified
@@ -338,6 +330,20 @@
 @protocol SCTableViewModelDataSource
 
 @optional
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/// @name Section Management
+//////////////////////////////////////////////////////////////////////////////////////////
+
+/*! Asks the dataSource to provide custom sorting for the model's sections. 
+ *	Note: If you just need to sort the sections alphabetically, just set your model's 
+ *	autoSortSections property to TRUE.
+ *	@param tableViewModel The model requesting the sorted sections array.
+ *	@param sectionsArray The array containing the sections to be sorted. All objects of the array
+ *	are of type SCTableViewSection.
+ */
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel sortSections:(NSMutableArray *)sectionsArray;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /// @name Custom cells
@@ -684,6 +690,16 @@
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel 
 	accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
 
+/*! Requests the default title of the delete-confirmation button for the cell
+ *	at the specified indexPath.
+ *	
+ *	@param tableViewModel The model informing the delegate of the event.
+ *	@param indexPath The index path of the cell requesting the delete-confirmation button title.
+ *	@return A localized string to used as the title of the delete-confirmation button.
+ */
+- (NSString *)tableViewModel:(SCTableViewModel *)tableViewModel 
+	titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 /*! Notifies the delegate that the value of the cell at the specified indexPath has changed.
  *	
  *	@param tableViewModel The model informing the delegate of the event.
@@ -987,6 +1003,12 @@
 
 /*! Method called internally by framework when the model should add a new item. */
 - (void)addNewItem:(NSObject *)newItem;
+
+/*! Method called internally by framework when a model item has been modified. */
+- (void)itemModified:(NSObject *)item inSection:(SCArrayOfItemsSection *)section;
+
+/*! Method called internally by framework. */
+- (NSUInteger)getSectionIndexForItem:(NSObject *)item;
 
 @end
 

@@ -17,16 +17,16 @@
 		5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5526B012132D078B000EB6DC /* NSString+DBExtensions.m */; };
 		5534856C1338ED7C00816A66 /* TitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5534856B1338ED7C00816A66 /* TitleButton.m */; };
 		5534856E1339F7EE00816A66 /* Help.png in Resources */ = {isa = PBXBuildFile; fileRef = 5534856D1339F7EE00816A66 /* Help.png */; };
-		5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */; };
-		5589273013278E7600E1E293 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589271E13278E7600E1E293 /* SCBadgeView.m */; };
-		5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272013278E7600E1E293 /* SCClassDefinition.m */; };
-		5589273213278E7600E1E293 /* SCGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272213278E7600E1E293 /* SCGlobals.m */; };
-		5589273313278E7600E1E293 /* SCPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272413278E7600E1E293 /* SCPropertyAttributes.m */; };
-		5589273413278E7600E1E293 /* SCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272613278E7600E1E293 /* SCTableViewCell.m */; };
-		5589273513278E7600E1E293 /* SCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272813278E7600E1E293 /* SCTableViewController.m */; };
-		5589273613278E7600E1E293 /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272A13278E7600E1E293 /* SCTableViewModel.m */; };
-		5589273713278E7600E1E293 /* SCTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272C13278E7600E1E293 /* SCTableViewSection.m */; };
-		5589273813278E7600E1E293 /* SCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589272E13278E7600E1E293 /* SCViewController.m */; };
+		553487FE133BDAD500816A66 /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 553487EB133BDAD500816A66 /* LICENSE AGREEMENT.rtf */; };
+		553487FF133BDAD500816A66 /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487ED133BDAD500816A66 /* SCBadgeView.m */; };
+		55348800133BDAD500816A66 /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487EF133BDAD500816A66 /* SCClassDefinition.m */; };
+		55348801133BDAD500816A66 /* SCGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487F1133BDAD500816A66 /* SCGlobals.m */; };
+		55348802133BDAD500816A66 /* SCPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487F3133BDAD500816A66 /* SCPropertyAttributes.m */; };
+		55348803133BDAD500816A66 /* SCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487F5133BDAD500816A66 /* SCTableViewCell.m */; };
+		55348804133BDAD500816A66 /* SCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487F7133BDAD500816A66 /* SCTableViewController.m */; };
+		55348805133BDAD500816A66 /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487F9133BDAD500816A66 /* SCTableViewModel.m */; };
+		55348806133BDAD500816A66 /* SCTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487FB133BDAD500816A66 /* SCTableViewSection.m */; };
+		55348807133BDAD500816A66 /* SCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 553487FD133BDAD500816A66 /* SCViewController.m */; };
 		5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5589275B1327927A00E1E293 /* EntriesViewController.m */; };
 		5594239E13357489007039F3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5594239D13357489007039F3 /* MainWindow.xib */; };
 		559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EEF13360AF900180E4E /* EntriesViewController.xib */; };
@@ -57,25 +57,25 @@
 		5534856A1338ED7C00816A66 /* TitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleButton.h; sourceTree = "<group>"; };
 		5534856B1338ED7C00816A66 /* TitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleButton.m; sourceTree = "<group>"; };
 		5534856D1339F7EE00816A66 /* Help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Help.png; sourceTree = "<group>"; };
-		5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
-		5589271D13278E7600E1E293 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
-		5589271E13278E7600E1E293 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
-		5589271F13278E7600E1E293 /* SCClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClassDefinition.h; sourceTree = "<group>"; };
-		5589272013278E7600E1E293 /* SCClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClassDefinition.m; sourceTree = "<group>"; };
-		5589272113278E7600E1E293 /* SCGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGlobals.h; sourceTree = "<group>"; };
-		5589272213278E7600E1E293 /* SCGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGlobals.m; sourceTree = "<group>"; };
-		5589272313278E7600E1E293 /* SCPropertyAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPropertyAttributes.h; sourceTree = "<group>"; };
-		5589272413278E7600E1E293 /* SCPropertyAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPropertyAttributes.m; sourceTree = "<group>"; };
-		5589272513278E7600E1E293 /* SCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewCell.h; sourceTree = "<group>"; };
-		5589272613278E7600E1E293 /* SCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewCell.m; sourceTree = "<group>"; };
-		5589272713278E7600E1E293 /* SCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewController.h; sourceTree = "<group>"; };
-		5589272813278E7600E1E293 /* SCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewController.m; sourceTree = "<group>"; };
-		5589272913278E7600E1E293 /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewModel.h; sourceTree = "<group>"; };
-		5589272A13278E7600E1E293 /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewModel.m; sourceTree = "<group>"; };
-		5589272B13278E7600E1E293 /* SCTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewSection.h; sourceTree = "<group>"; };
-		5589272C13278E7600E1E293 /* SCTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSection.m; sourceTree = "<group>"; };
-		5589272D13278E7600E1E293 /* SCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCViewController.h; sourceTree = "<group>"; };
-		5589272E13278E7600E1E293 /* SCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCViewController.m; sourceTree = "<group>"; };
+		553487EB133BDAD500816A66 /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
+		553487EC133BDAD500816A66 /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
+		553487ED133BDAD500816A66 /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
+		553487EE133BDAD500816A66 /* SCClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClassDefinition.h; sourceTree = "<group>"; };
+		553487EF133BDAD500816A66 /* SCClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClassDefinition.m; sourceTree = "<group>"; };
+		553487F0133BDAD500816A66 /* SCGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGlobals.h; sourceTree = "<group>"; };
+		553487F1133BDAD500816A66 /* SCGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGlobals.m; sourceTree = "<group>"; };
+		553487F2133BDAD500816A66 /* SCPropertyAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPropertyAttributes.h; sourceTree = "<group>"; };
+		553487F3133BDAD500816A66 /* SCPropertyAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPropertyAttributes.m; sourceTree = "<group>"; };
+		553487F4133BDAD500816A66 /* SCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewCell.h; sourceTree = "<group>"; };
+		553487F5133BDAD500816A66 /* SCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewCell.m; sourceTree = "<group>"; };
+		553487F6133BDAD500816A66 /* SCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewController.h; sourceTree = "<group>"; };
+		553487F7133BDAD500816A66 /* SCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewController.m; sourceTree = "<group>"; };
+		553487F8133BDAD500816A66 /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewModel.h; sourceTree = "<group>"; };
+		553487F9133BDAD500816A66 /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewModel.m; sourceTree = "<group>"; };
+		553487FA133BDAD500816A66 /* SCTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewSection.h; sourceTree = "<group>"; };
+		553487FB133BDAD500816A66 /* SCTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSection.m; sourceTree = "<group>"; };
+		553487FC133BDAD500816A66 /* SCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCViewController.h; sourceTree = "<group>"; };
+		553487FD133BDAD500816A66 /* SCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCViewController.m; sourceTree = "<group>"; };
 		5589275A1327927A00E1E293 /* EntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesViewController.h; sourceTree = "<group>"; };
 		5589275B1327927A00E1E293 /* EntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesViewController.m; sourceTree = "<group>"; };
 		5594239D13357489007039F3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -189,40 +189,40 @@
 			path = NSStringExtensions;
 			sourceTree = "<group>";
 		};
+		553487EA133BDAD500816A66 /* Sensible TableView */ = {
+			isa = PBXGroup;
+			children = (
+				553487EB133BDAD500816A66 /* LICENSE AGREEMENT.rtf */,
+				553487EC133BDAD500816A66 /* SCBadgeView.h */,
+				553487ED133BDAD500816A66 /* SCBadgeView.m */,
+				553487EE133BDAD500816A66 /* SCClassDefinition.h */,
+				553487EF133BDAD500816A66 /* SCClassDefinition.m */,
+				553487F0133BDAD500816A66 /* SCGlobals.h */,
+				553487F1133BDAD500816A66 /* SCGlobals.m */,
+				553487F2133BDAD500816A66 /* SCPropertyAttributes.h */,
+				553487F3133BDAD500816A66 /* SCPropertyAttributes.m */,
+				553487F4133BDAD500816A66 /* SCTableViewCell.h */,
+				553487F5133BDAD500816A66 /* SCTableViewCell.m */,
+				553487F6133BDAD500816A66 /* SCTableViewController.h */,
+				553487F7133BDAD500816A66 /* SCTableViewController.m */,
+				553487F8133BDAD500816A66 /* SCTableViewModel.h */,
+				553487F9133BDAD500816A66 /* SCTableViewModel.m */,
+				553487FA133BDAD500816A66 /* SCTableViewSection.h */,
+				553487FB133BDAD500816A66 /* SCTableViewSection.m */,
+				553487FC133BDAD500816A66 /* SCViewController.h */,
+				553487FD133BDAD500816A66 /* SCViewController.m */,
+			);
+			path = "Sensible TableView";
+			sourceTree = "<group>";
+		};
 		5589271913278E1500E1E293 /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				553487EA133BDAD500816A66 /* Sensible TableView */,
 				55BDEFA9133202A6005A89D4 /* DateCalculations */,
 				5526B010132D078A000EB6DC /* NSStringExtensions */,
-				5589271B13278E7600E1E293 /* Sensible TableView */,
 			);
 			name = vendor;
-			sourceTree = "<group>";
-		};
-		5589271B13278E7600E1E293 /* Sensible TableView */ = {
-			isa = PBXGroup;
-			children = (
-				5589271C13278E7600E1E293 /* LICENSE AGREEMENT.rtf */,
-				5589271D13278E7600E1E293 /* SCBadgeView.h */,
-				5589271E13278E7600E1E293 /* SCBadgeView.m */,
-				5589271F13278E7600E1E293 /* SCClassDefinition.h */,
-				5589272013278E7600E1E293 /* SCClassDefinition.m */,
-				5589272113278E7600E1E293 /* SCGlobals.h */,
-				5589272213278E7600E1E293 /* SCGlobals.m */,
-				5589272313278E7600E1E293 /* SCPropertyAttributes.h */,
-				5589272413278E7600E1E293 /* SCPropertyAttributes.m */,
-				5589272513278E7600E1E293 /* SCTableViewCell.h */,
-				5589272613278E7600E1E293 /* SCTableViewCell.m */,
-				5589272713278E7600E1E293 /* SCTableViewController.h */,
-				5589272813278E7600E1E293 /* SCTableViewController.m */,
-				5589272913278E7600E1E293 /* SCTableViewModel.h */,
-				5589272A13278E7600E1E293 /* SCTableViewModel.m */,
-				5589272B13278E7600E1E293 /* SCTableViewSection.h */,
-				5589272C13278E7600E1E293 /* SCTableViewSection.m */,
-				5589272D13278E7600E1E293 /* SCViewController.h */,
-				5589272E13278E7600E1E293 /* SCViewController.m */,
-			);
-			path = "Sensible TableView";
 			sourceTree = "<group>";
 		};
 		559B0EEC1336092C00180E4E /* Images */ = {
@@ -325,7 +325,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5589272F13278E7600E1E293 /* LICENSE AGREEMENT.rtf in Resources */,
 				5594239E13357489007039F3 /* MainWindow.xib in Resources */,
 				559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */,
 				559B0EF213361A7300180E4E /* background.png in Resources */,
@@ -333,6 +332,7 @@
 				559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */,
 				559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */,
 				5534856E1339F7EE00816A66 /* Help.png in Resources */,
+				553487FE133BDAD500816A66 /* LICENSE AGREEMENT.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,15 +346,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* FoodReminderAppDelegate.m in Sources */,
 				28D3F202112F7DC200FD0661 /* FoodReminder.xcdatamodeld in Sources */,
-				5589273013278E7600E1E293 /* SCBadgeView.m in Sources */,
-				5589273113278E7600E1E293 /* SCClassDefinition.m in Sources */,
-				5589273213278E7600E1E293 /* SCGlobals.m in Sources */,
-				5589273313278E7600E1E293 /* SCPropertyAttributes.m in Sources */,
-				5589273413278E7600E1E293 /* SCTableViewCell.m in Sources */,
-				5589273513278E7600E1E293 /* SCTableViewController.m in Sources */,
-				5589273613278E7600E1E293 /* SCTableViewModel.m in Sources */,
-				5589273713278E7600E1E293 /* SCTableViewSection.m in Sources */,
-				5589273813278E7600E1E293 /* SCViewController.m in Sources */,
 				5589275C1327927A00E1E293 /* EntriesViewController.m in Sources */,
 				55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */,
 				5526B013132D078B000EB6DC /* NSString+DBExtensions.m in Sources */,
@@ -362,6 +353,15 @@
 				55BDEFAC133202A6005A89D4 /* NSDate+Calculations.m in Sources */,
 				559B0F0613363A6200180E4E /* ClassyButton.m in Sources */,
 				5534856C1338ED7C00816A66 /* TitleButton.m in Sources */,
+				553487FF133BDAD500816A66 /* SCBadgeView.m in Sources */,
+				55348800133BDAD500816A66 /* SCClassDefinition.m in Sources */,
+				55348801133BDAD500816A66 /* SCGlobals.m in Sources */,
+				55348802133BDAD500816A66 /* SCPropertyAttributes.m in Sources */,
+				55348803133BDAD500816A66 /* SCTableViewCell.m in Sources */,
+				55348804133BDAD500816A66 /* SCTableViewController.m in Sources */,
+				55348805133BDAD500816A66 /* SCTableViewModel.m in Sources */,
+				55348806133BDAD500816A66 /* SCTableViewSection.m in Sources */,
+				55348807133BDAD500816A66 /* SCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

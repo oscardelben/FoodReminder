@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -724,7 +724,7 @@
 		allowMovingItems = TRUE;
 		allowEditDetailView = TRUE;
 		allowRowSelection = TRUE;
-		autoSelectNewItemCell = TRUE;
+		autoSelectNewItemCell = FALSE;
 		detailViewModal = FALSE;
 #ifdef __IPHONE_3_2
 		detailViewModalPresentationStyle = UIModalPresentationFullScreen;
@@ -999,7 +999,6 @@
 		}
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel prepareModelForCustomDetailViewAppearing];
 	if(navController && !self.detailViewModal)
 	{
 		if(inPopover)
@@ -1098,8 +1097,6 @@
 	}
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	
-	[self.ownerTableViewModel prepareModelForCustomDetailViewAppearing];
 	
 	if(inPopover && self.detailViewModalPresentationStyle==UIModalPresentationCurrentContext
 	   && self.ownerTableViewModel.viewController.navigationController)
@@ -1228,6 +1225,10 @@
 	// Does nothing, override in subclasses
 }
 
+- (void)itemModified:(NSObject *)item
+{
+	// Does nothing, override in subclasses
+}
 
 #pragma mark -
 #pragma mark SCTableViewControllerDelegate methods
@@ -1236,7 +1237,8 @@
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel prepareModelForCustomDetailViewDisappearing];
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
 	
 	if([self.ownerTableViewModel.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
 	   && [self.ownerTableViewModel.delegate 
@@ -1251,6 +1253,9 @@
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if([self.ownerTableViewModel.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
 	   && [self.ownerTableViewModel.delegate 
 		   respondsToSelector:@selector(tableViewModel:detailViewDidDisappearForSectionAtIndex:)])
@@ -1314,9 +1319,11 @@
 	[self.ownerTableViewModel.modeledTableView scrollToRowAtIndexPath:newRowIndexPath 
 													 atScrollPosition:UITableViewScrollPositionNone
 															 animated:YES];
-	if(self.autoSelectNewItemCell)
-		[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:newRowIndexPath animated:TRUE 
-														 scrollPosition:UITableViewScrollPositionNone];
+	
+	[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:newRowIndexPath animated:TRUE 
+													 scrollPosition:UITableViewScrollPositionNone];
+	if(!self.autoSelectNewItemCell && !tempDetailModel)
+		[self.ownerTableViewModel.modeledTableView deselectRowAtIndexPath:newRowIndexPath animated:TRUE];
 	
 	if([self.ownerTableViewModel.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
 	   && [self.ownerTableViewModel.delegate 
@@ -1374,11 +1381,10 @@
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel prepareModelForCustomDetailViewDisappearing];
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
 	
-	// (!selectedCellIndexPath && !doneTapped)==TRUE means that the user terminated the application before
-	//	tapping any buttons.
-	if(cancelTapped || (!selectedCellIndexPath && !doneTapped))
+	if(cancelTapped)
 	{
 		[tempItem release];
 		tempItem = nil;
@@ -1418,6 +1424,9 @@
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[super tableViewControllerDidDisappear:tableViewController cancelButtonTapped:cancelTapped
 						  doneButtonTapped:doneTapped];
 	
@@ -1426,6 +1435,7 @@
 		NSArray *indexPaths = [NSArray arrayWithObject:selectedCellIndexPath];
 		[self.ownerTableViewModel.modeledTableView reloadRowsAtIndexPaths:indexPaths
 														 withRowAnimation:UITableViewRowAnimationNone];
+		
 		if(tempDetailModel)
 		{
 			[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:selectedCellIndexPath animated:NO 
@@ -1787,21 +1797,28 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 		}
 		else
 		{
-			// Sort the items array (if key is sortable)
-			NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] 
-											initWithKey:classDef.keyPropertyName
-											ascending:self.sortItemsSetAscending];
-			@try 
+			if(itemsPredicate)
 			{
-				[items sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+				[self reloadBoundValues];
 			}
-			@catch (NSException * e) 
+			else
 			{
-				// do nothing (do not sort)
-			}
-			@finally 
-			{
-				[descriptor release];
+				// Sort the items array (if key is sortable)
+				NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] 
+												initWithKey:classDef.keyPropertyName
+												ascending:self.sortItemsSetAscending];
+				@try 
+				{
+					[items sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+				}
+				@catch (NSException * e) 
+				{
+					// do nothing (do not sort)
+				}
+				@finally 
+				{
+					[descriptor release];
+				}
 			}
 		}
 	}
@@ -1816,9 +1833,11 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 	[self.ownerTableViewModel.modeledTableView scrollToRowAtIndexPath:newRowIndexPath 
 													 atScrollPosition:UITableViewScrollPositionNone
 															 animated:YES];
-	if(self.autoSelectNewItemCell)
-		[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:newRowIndexPath animated:TRUE 
-														 scrollPosition:UITableViewScrollPositionNone];
+	
+	[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:newRowIndexPath animated:TRUE 
+													 scrollPosition:UITableViewScrollPositionNone];
+	if(!self.autoSelectNewItemCell && !tempDetailModel)
+		[self.ownerTableViewModel.modeledTableView deselectRowAtIndexPath:newRowIndexPath animated:TRUE];
 	
 	if([self.ownerTableViewModel.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
 	   && [self.ownerTableViewModel.delegate 
@@ -1894,8 +1913,6 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel prepareModelForCustomDetailViewDisappearing];
-	
 	// (!selectedCellIndexPath && !doneTapped)==TRUE means that the user terminated the application before
 	//	tapping any buttons.
 	if(cancelTapped || (!selectedCellIndexPath && !doneTapped))
@@ -1913,9 +1930,12 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 		return;
 	}
 	
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	// Check if tempItem is nil, which would happen if the application enters the background
 	// and then comes back to the foreground.
-	if(tempItem == nil)
+	if(tempItem==nil && !selectedCellIndexPath)
 	{
 		for(int i=0; i<tableViewController.tableViewModel.sectionCount; i++)
 		{
@@ -1981,19 +2001,79 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[super tableViewControllerDidDisappear:tableViewController cancelButtonTapped:cancelTapped
 						  doneButtonTapped:doneTapped];
 	
 	if(selectedCellIndexPath)
 	{
-		NSArray *indexPaths = [NSArray arrayWithObject:selectedCellIndexPath];
-		[self.ownerTableViewModel.modeledTableView reloadRowsAtIndexPaths:indexPaths
-														 withRowAnimation:UITableViewRowAnimationNone];
-		if(tempDetailModel)
+		[self.ownerTableViewModel.modeledTableView 
+		   reloadRowsAtIndexPaths:[NSArray arrayWithObject:selectedCellIndexPath]
+				withRowAnimation:UITableViewRowAnimationNone];
+		
+		// Check if the owner model is an SCArrayOfItemsModel
+		if([self.ownerTableViewModel isKindOfClass:[SCArrayOfItemsModel class]])
 		{
-			[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:selectedCellIndexPath animated:NO 
-															 scrollPosition:UITableViewScrollPositionNone];
+			// Have model handle the item modification
+			[(SCArrayOfItemsModel *)self.ownerTableViewModel 
+				itemModified:[self.items objectAtIndex:selectedCellIndexPath.row]
+					inSection:self];
 		}
+		else 
+		{
+			[self itemModified:[self.items objectAtIndex:selectedCellIndexPath.row]];
+		}
+	}
+}
+
+// overrides superclass
+- (void)itemModified:(NSObject *)item
+{
+	SCClassDefinition *classDef = [self firstClassDefinition];
+	if(coreDataBound && !classDef.orderAttributeName)
+	{
+		// Sort the items array (if key is sortable)
+		NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] 
+										initWithKey:classDef.keyPropertyName
+										ascending:self.sortItemsSetAscending];
+		@try 
+		{
+			[items sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+		}
+		@catch (NSException * e) 
+		{
+			// do nothing (do not sort)
+		}
+		@finally 
+		{
+			[descriptor release];
+		}
+	}
+	NSUInteger oldObjectIndex = selectedCellIndexPath.row;
+	NSUInteger modifiedObjectIndex = [items indexOfObjectIdenticalTo:item];
+	
+	if(modifiedObjectIndex != oldObjectIndex)
+	{
+		NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:modifiedObjectIndex 
+													   inSection:selectedCellIndexPath.section];
+		[self.ownerTableViewModel.modeledTableView beginUpdates];
+		[self.ownerTableViewModel.modeledTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:selectedCellIndexPath]
+														 withRowAnimation:UITableViewRowAnimationLeft];
+		[self.ownerTableViewModel.modeledTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+														 withRowAnimation:UITableViewRowAnimationLeft];
+		[self.ownerTableViewModel.modeledTableView endUpdates];
+		
+		// update selectedCellIndexPath
+		[selectedCellIndexPath release];
+		selectedCellIndexPath = [newIndexPath retain];
+	}
+	
+	if(tempDetailModel)
+	{
+		[self.ownerTableViewModel.modeledTableView selectRowAtIndexPath:selectedCellIndexPath animated:NO 
+														 scrollPosition:UITableViewScrollPositionNone];
 	}
 }
 

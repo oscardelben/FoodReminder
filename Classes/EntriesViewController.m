@@ -13,6 +13,7 @@
 @implementation EntriesViewController
 
 @synthesize tableView;
+@synthesize appTitle;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -24,6 +25,8 @@
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorColor = [UIColor blackColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    appTitle.font = [UIFont fontWithName:@"BrushScriptStd" size:48];
     
 	NSManagedObjectContext *managedObjectContext = 
         [(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -48,6 +51,7 @@
 - (void)dealloc {	
 	[tableModel release];
     [tableView release];
+    [appTitle release];
     [super dealloc];
 }
 

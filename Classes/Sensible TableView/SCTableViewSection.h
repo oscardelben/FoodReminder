@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -308,6 +308,7 @@
 	//internal
 	SCTableViewModel *tempDetailModel;
 	NSMutableArray *cellReuseIdentifiers;
+	NSObject *tempItem;		//used for temporarily storing newly added items
 	
 	NSMutableArray *items;
 	UITableViewCellAccessoryType itemsAccessoryType;
@@ -326,7 +327,7 @@
 	NSString *cellIdentifier;
 	NSIndexPath *selectedCellIndexPath;
 	UIBarButtonItem *addButtonItem;
-	NSObject *tempItem;		//used for temporarily storing newly added items
+	SCTableViewCell *addNewItemCell;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -490,6 +491,10 @@
 /*! Subclasses should override this method to handle adding a new item
  *	(method called internally by framework) */
 - (void)addNewItem:(NSObject *)newItem;
+
+/*! Subclasses should override this method to handle adding an item getting modified
+ *	(method called internally by framework) */
+- (void)itemModified:(NSObject *)item;
 
 /*! Method gets called internally by framework. */
 - (void)tempDetailModelModified;

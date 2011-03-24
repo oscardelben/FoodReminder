@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -65,7 +65,7 @@
 		{
 			UITableViewCell *ownerCell = (UITableViewCell *)spview;
 			
-			if((ownerCell.highlighted || ownerCell.selected) && ownerCell.selectionStyle != UITableViewCellEditingStyleNone)
+			if( (ownerCell.highlighted || ownerCell.selected) && ownerCell.selectionStyle!=UITableViewCellEditingStyleNone )
 				badgeColor = [UIColor whiteColor];
 			
 			break;

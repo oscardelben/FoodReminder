@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -85,6 +85,24 @@ typedef enum
 } SCNavigationBarType;
 
 
+/*! The types of SCViewController and SCTableViewController states. */
+typedef enum
+{
+	/*! View controller is being displayed for the first time. A view controller remains in this state
+	 *	until the viewDidAppear method has been called. */
+	SCViewControllerStateNew,
+	/*! View controller is visible and active. */
+	SCViewControllerStateActive,
+	/*! View controller has disappeared and is inactive. */
+	SCViewControllerStateInactive,
+	/*! View controller has been dismissed (using either the Done or Cancel buttons). */
+	SCViewControllerStateDismissed
+	
+} SCViewControllerState;
+
+
+
+
 @class SCClassDefinition;
 
 /* This class defines a set of internal helper methods */
@@ -120,6 +138,29 @@ typedef enum
 			separateValuesUsingDelimiter:(NSString *)delimiter;
 
 @end
+
+
+
+
+@class SCTableViewModel;
+
+/* This class defines a tabel view model center.
+ * IMPORTANT: This class should only be used internally by the framework. */
+@interface SCModelCenter : NSObject
+{
+	NSMutableArray *modelsArray;
+}
+
+@property (nonatomic, assign) UIViewController *keyboardIssuer;
+
++ (SCModelCenter *)sharedModelCenter;
+
+- (void)registerModel:(SCTableViewModel *)model;
+- (void)unregisterModel:(SCTableViewModel *)model;
+
+@end
+
+
 
 
 

@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -31,9 +31,11 @@
 @synthesize name;
 @synthesize title;
 @synthesize type;
+@synthesize attributes;
+@synthesize editingModeType;
+@synthesize editingModeAttributes;
 @synthesize required;
 @synthesize autoValidate;
-@synthesize attributes;
 
 + (id)definitionWithName:(NSString *)propertyName
 {
@@ -68,9 +70,11 @@
 		name = [propertyName copy];
 		self.title = propertyTitle;
 		self.type = propertyType;
+		self.attributes = nil;
+		self.editingModeType = SCPropertyTypeUndefined;
+		self.editingModeAttributes = nil;
 		self.required = FALSE;
 		self.autoValidate = TRUE;
-		self.attributes = nil;
 	}
 	return self;
 }
@@ -80,6 +84,7 @@
 	[name release];
 	[title release];
 	[attributes release];
+	[editingModeAttributes release];
 	
 	[super dealloc];
 }
@@ -465,7 +470,7 @@ withManagedObjectContext:(NSManagedObjectContext *)context
 				SCPropertyDefinition *propertyDef = [SCPropertyDefinition 
 													 definitionWithName:propertyName
 													 title:propertyTitle
-													 type:SCPropertyTypeNone];
+													 type:SCPropertyTypeUndefined];
 				propertyDef.required = ![propertyDescription isOptional];
 				
 				if([propertyDescription isKindOfClass:[NSAttributeDescription class]])
@@ -709,7 +714,7 @@ withManagedObjectContext:(NSManagedObjectContext *)context
 - (void)removePropertyDefinitionWithName:(NSString *)propertyName
 {
 	NSUInteger index = [self indexOfPropertyDefinitionWithName:propertyName];
-	if(index != -1)
+	if(index != NSNotFound)
 		[propertyDefinitions removeObjectAtIndex:index];
 }
 
@@ -721,7 +726,7 @@ withManagedObjectContext:(NSManagedObjectContext *)context
 - (SCPropertyDefinition *)propertyDefinitionWithName:(NSString *)propertyName
 {
 	NSUInteger index = [self indexOfPropertyDefinitionWithName:propertyName];
-	if(index != -1)
+	if(index != NSNotFound)
 		return [propertyDefinitions objectAtIndex:index];
 	//else
 	return nil;
@@ -735,7 +740,7 @@ withManagedObjectContext:(NSManagedObjectContext *)context
 		if([propertyDefinition.name isEqualToString:propertyName])
 			return i;
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (BOOL)isValidPropertyName:(NSString *)propertyName

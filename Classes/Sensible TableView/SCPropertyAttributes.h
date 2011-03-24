@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -323,6 +323,8 @@
 @interface SCDateAttributes : SCPropertyAttributes
 {
 	NSDateFormatter *dateFormatter;
+	UIDatePickerMode datePickerMode;
+	BOOL displayDatePickerInDetailView;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -335,11 +337,31 @@
  */
 + (id)attributesWithDateFormatter:(NSDateFormatter *)formatter;
 
+/*! Allocates and returns an initialized %SCDateAttributes.
+ *
+ *	@param formatter The date formatter used to display the date of generated control. Set to nil to ignore.
+ *	@param mode The date picker mode.
+ *	@param inDetailView Set to TRUE to display the date picker in an automatically generated detail view.
+ */
++ (id)attributesWithDateFormatter:(NSDateFormatter *)formatter
+				   datePickerMode:(UIDatePickerMode)mode
+	displayDatePickerInDetailView:(BOOL)inDetailView;
+
 /*! Returns an initialized %SCDateAttributes.
  *
  *	@param formatter The date formatter used to display the date of generated control. Set to nil to ignore.
  */
 - (id)initWithDateFormatter:(NSDateFormatter *)formatter;
+
+/*! Returns an initialized %SCDateAttributes.
+ *
+ *	@param formatter The date formatter used to display the date of generated control. Set to nil to ignore.
+ *	@param mode The date picker mode.
+ *	@param inDetailView Set to TRUE to display the date picker in an automatically generated detail view.
+ */
+- (id)initWithDateFormatter:(NSDateFormatter *)formatter
+			 datePickerMode:(UIDatePickerMode)mode
+	displayDatePickerInDetailView:(BOOL)inDetailView;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /// @name Configuration
@@ -347,6 +369,12 @@
 
 /*! The date formatter used to display the date of generated control. Set to nil to ignore. */
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
+
+/*! The date picker mode. Default:UIDatePickerModeDateAndTime. */
+@property (nonatomic, readwrite) UIDatePickerMode datePickerMode;
+
+/*! Set to TRUE to display the date picker in an automatically generated detail view. Default: FALSE. */
+@property (nonatomic, readwrite) BOOL displayDatePickerInDetailView;
 
 @end
 

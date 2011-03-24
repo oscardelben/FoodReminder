@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -40,6 +40,7 @@
 @synthesize buttonsToolbar;
 @synthesize cancelButtonTapped;
 @synthesize doneButtonTapped;
+@synthesize state;
 
 
 - (id)initWithStyle:(UITableViewStyle)style 
@@ -62,6 +63,8 @@
 		
 		cancelButtonTapped = FALSE;
 		doneButtonTapped = FALSE;
+		
+		state = SCViewControllerStateNew;
     }
     return self;
 }
@@ -121,11 +124,16 @@
 	{
 		[self.delegate tableViewControllerDidAppear:self];
 	}
+	
+	state = SCViewControllerStateActive;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+	
+	if(state != SCViewControllerStateDismissed)
+		state = SCViewControllerStateInactive;
 	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewControllerDelegate)]
 	   && [self.delegate respondsToSelector:
@@ -177,11 +185,23 @@
 	{
 		[self.delegate tableViewControllerWillAppear:self];
 	}
+	
+	if(state != SCViewControllerStateNew)
+		state = SCViewControllerStateActive;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+	
+	if(self.navigationController)
+	{
+		if([self.navigationController.viewControllers indexOfObject:self] == NSNotFound)
+		{
+			// self has been popped from the navigation controller
+			state = SCViewControllerStateDismissed;
+		}
+	}
 	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewControllerDelegate)]
 	   && [self.delegate respondsToSelector:
@@ -323,6 +343,8 @@
 	cancelButtonTapped = cancelValue;
 	doneButtonTapped = doneValue;
 	
+	state = SCViewControllerStateDismissed;
+	
 	if(self.navigationController)
 	{
 		// check if self is the rootViewController
@@ -336,6 +358,9 @@
 	else
 		[self dismissModalViewControllerAnimated:YES];
 }
+
+
+
 
 @end
 

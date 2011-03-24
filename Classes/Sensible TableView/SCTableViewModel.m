@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -26,14 +26,7 @@
 
 @interface SCTableViewModel ()
 
-- (void)registerForKeyboardNotifications;
-- (void)unregisterKeyboardNotifications;
-- (void)keyboardWillShow:(NSNotification *)aNotification;
-- (void)keyboardWillHide:(NSNotification *)aNotification;
 - (void)tableAnimationEnded:(NSString*)animationID finished:(NSNumber *)finished contextInfo:(void *)context;
-
-- (void)enableViewControllerDelegate;
-- (void)disableViewControllerDelegate;
 
 @end
 
@@ -76,7 +69,6 @@
 		target = nil;
 		action = nil;
 		masterModel = nil;
-		viewControllerDelegate = nil;
 		
 		modeledTableView = _modeledTableView;
 		viewController = _viewController;
@@ -106,7 +98,9 @@
 			self.autoResizeForKeyboard = FALSE;
 		else
 			self.autoResizeForKeyboard = TRUE;
-		autoResizeStatus = self.autoResizeForKeyboard;
+		
+		// Register with the shared model center
+		[[SCModelCenter sharedModelCenter] registerModel:self];
 	}
 	
 	return self;
@@ -114,7 +108,9 @@
 
 - (void)dealloc
 {
-	[self unregisterKeyboardNotifications];
+	// Unregister from the shared model center
+	[[SCModelCenter sharedModelCenter] unregisterModel:self];
+	
 	[editButtonItem release];
 	[sectionIndexTitles release];
 	[sections release];
@@ -122,50 +118,6 @@
 	[commitButton release];
 
 	[super dealloc];
-}
-
-- (void)disableViewControllerDelegate
-{
-	if([self.viewController isKindOfClass:[SCTableViewController class]])
-	{
-		SCTableViewController *_tableViewController = (SCTableViewController *)self.viewController;
-		viewControllerDelegate = _tableViewController.delegate;
-		_tableViewController.delegate = nil;
-	}
-	else
-		if([self.viewController isKindOfClass:[SCViewController class]])
-		{
-			SCViewController *_viewController = (SCViewController *)self.viewController;
-			viewControllerDelegate = _viewController.delegate;
-			_viewController.delegate = nil;
-		}
-}
-
-- (void)enableViewControllerDelegate
-{
-	if([self.viewController isKindOfClass:[SCTableViewController class]])
-	{
-		SCTableViewController *_tableViewController = (SCTableViewController *)self.viewController;
-		_tableViewController.delegate = viewControllerDelegate;
-	}
-	else
-		if([self.viewController isKindOfClass:[SCViewController class]])
-		{
-			SCViewController *_viewController = (SCViewController *)self.viewController;
-			_viewController.delegate = viewControllerDelegate;
-		}
-}
-
-- (void)prepareModelForCustomDetailViewAppearing
-{
-	[self pauseAutoResizeForKeyboard];
-	[self disableViewControllerDelegate];
-}
-
-- (void)prepareModelForCustomDetailViewDisappearing
-{
-	[self resumeAutoResizeForKeyboard];
-	[self enableViewControllerDelegate];
 }
 
 - (NSArray *)sectionIndexTitles
@@ -182,6 +134,13 @@
 			[titles addObject:[section.headerTitle substringToIndex:1]];
 		}
 	return titles;
+}
+
+- (void)setAutoSortSections:(BOOL)autoSort
+{
+	autoSortSections = autoSort;
+	if(autoSort)
+		[sections sortUsingSelector:@selector(compare:)];
 }
 
 - (void)setActiveCell:(SCTableViewCell *)cell
@@ -218,18 +177,9 @@
 - (void)setAutoResizeForKeyboard:(BOOL)handleDidShow
 {
 	if([self.viewController isKindOfClass:[UITableViewController class]])
-		return;
-	
-	autoResizeForKeyboard = handleDidShow;
-	
-	if(handleDidShow)
-	{
-		[self registerForKeyboardNotifications];
-	}
+		autoResizeForKeyboard = FALSE;
 	else
-	{
-		[self unregisterKeyboardNotifications];
-	}
+		autoResizeForKeyboard = handleDidShow;
 }
 
 - (void)setEditButtonItem:(UIBarButtonItem *)barButtonItem
@@ -352,8 +302,14 @@
 	}
 	[sections addObject:section];
 	
-	if(self.autoSortSections)
-		[sections sortUsingSelector:@selector(compare:)];
+	if([self.dataSource conformsToProtocol:@protocol(SCTableViewModelDataSource)]
+	   && [self.dataSource respondsToSelector:@selector(tableViewModel:sortSections:)])
+	{
+		[self.dataSource tableViewModel:self sortSections:sections];
+	}
+	else 
+		if(self.autoSortSections)
+			[sections sortUsingSelector:@selector(compare:)];
 }
 
 - (void)insertSection:(SCTableViewSection *)section atIndex:(NSUInteger)index
@@ -462,18 +418,6 @@
 	for(SCTableViewSection *section in sections)
 		[section reloadBoundValues];
 }
-
-- (void)pauseAutoResizeForKeyboard
-{
-	autoResizeStatus = self.autoResizeForKeyboard;
-	self.autoResizeForKeyboard = FALSE;
-}
-
-- (void)resumeAutoResizeForKeyboard
-{
-	self.autoResizeForKeyboard = autoResizeStatus;
-}
-
 
 #pragma mark -
 #pragma mark UITableViewDataSource methods
@@ -759,12 +703,7 @@
 		else
 			self.activeCell = nil;
 	}
-	
-	SCTableViewSection *section = [self sectionAtIndex:indexPath.section];
-	if([section isKindOfClass:[SCArrayOfItemsSection class]])
-		[(SCArrayOfItemsSection *)section didSelectCellAtIndexPath:indexPath];
-	else
-		[activeCell didSelectCell];
+	[activeCell didSelectCell];
 	
 	if([cell.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [cell.delegate respondsToSelector:@selector(didSelectCell:)])
@@ -776,6 +715,12 @@
 		   && [self.delegate respondsToSelector:@selector(tableViewModel:didSelectRowAtIndexPath:)])
 		{
 			[self.delegate tableViewModel:self didSelectRowAtIndexPath:indexPath];
+		}
+		else
+		{
+			SCTableViewSection *section = [self sectionAtIndex:indexPath.section];
+			if([section isKindOfClass:[SCArrayOfItemsSection class]])
+				[(SCArrayOfItemsSection *)section didSelectCellAtIndexPath:indexPath];
 		}
 }
 
@@ -821,27 +766,37 @@
 		{
 			[self.delegate tableViewModel:self accessoryButtonTappedForRowWithIndexPath:indexPath];
 		}
+		else
+		{
+			[self tableView:tableView didSelectRowAtIndexPath:indexPath];
+		}
+}
+
+- (NSString *)tableView:(UITableView *)tableView 
+	titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	NSString *deleteTitle;
+	
+	if([self.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
+	   && [self.delegate 
+		   respondsToSelector:@selector(tableViewModel:titleForDeleteConfirmationButtonForRowAtIndexPath:)])
+	{
+		deleteTitle = [self.delegate tableViewModel:self titleForDeleteConfirmationButtonForRowAtIndexPath:indexPath];
+	}
+	else
+	{
+		deleteTitle = NSLocalizedString(@"Delete", @"Delete Button Title");
+	}
+	
+	return deleteTitle;
 }
 
 #pragma mark -
 #pragma mark Keyboard methods
 
-- (void)registerForKeyboardNotifications
-{
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) 
-												 name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) 
-												 name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)unregisterKeyboardNotifications
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
-	if (keyboardShown) 
+	if(!self.autoResizeForKeyboard || keyboardShown) 
 		return;
 	
 	keyboardShown = YES;
@@ -899,6 +854,7 @@
 #ifdef __IPHONE_4_0
 #ifdef DEPLOYMENT_OS_PRIOR_TO_3_2
 		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(tableAnimationEnded:finished:contextInfo:)];
 		[UIView setAnimationDelay:delay];
@@ -908,12 +864,13 @@
 		[UIView commitAnimations];
 #else
 		[UIView animateWithDuration:animationDuration delay:delay 
-							options:UIViewAnimationOptionCurveEaseInOut 
+							options:UIViewAnimationOptionBeginFromCurrentState 
 						 animations:^{ self.modeledTableView.frame = tableFrame; } 
 						 completion:^(BOOL finished){ [self tableAnimationEnded:nil finished:nil contextInfo:nil]; }];
 #endif
 #else
 		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDelegate:self];
 		[UIView setAnimationDidStopSelector:@selector(tableAnimationEnded:finished:contextInfo:)];
 		[UIView setAnimationDelay:delay];
@@ -927,6 +884,9 @@
 
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+	if(!self.autoResizeForKeyboard || !keyboardShown)
+		return;
+	
 	keyboardShown = NO;
 	
 	if(keyboardOverlap == 0)
@@ -966,14 +926,19 @@
 #ifdef __IPHONE_4_0
 #ifdef DEPLOYMENT_OS_PRIOR_TO_3_2
 	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationBeginsFromCurrentState:YES];
 	[UIView setAnimationDuration:animationDuration];
 	self.modeledTableView.frame = tableFrame;
 	[UIView commitAnimations];
 #else
-	[UIView animateWithDuration:animationDuration animations:^{ self.modeledTableView.frame = tableFrame; }];
+	[UIView animateWithDuration:animationDuration delay:0 
+						options:UIViewAnimationOptionBeginFromCurrentState 
+					 animations:^{ self.modeledTableView.frame = tableFrame; } 
+					 completion:nil];
 #endif
 #else
 	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:animationDuration];
     self.modeledTableView.frame = tableFrame;
     [UIView commitAnimations];
@@ -1041,7 +1006,7 @@
 		allowMovingItems = FALSE;
 		allowEditDetailView = TRUE;
 		allowRowSelection = TRUE;
-		autoSelectNewItemCell = TRUE;
+		autoSelectNewItemCell = FALSE;
 		detailViewModal = FALSE;
 #ifdef __IPHONE_3_2
 		detailViewModalPresentationStyle = UIModalPresentationFullScreen;
@@ -1078,6 +1043,12 @@
 	[searchBar release];
 	
 	[super dealloc];
+}
+
+//override superclass
+- (void)reloadBoundValues
+{
+	[self generateSections];
 }
 
 - (void)generateSections
@@ -1133,6 +1104,22 @@
 	}
 	
 	return headerTitleName;
+}
+
+- (NSUInteger)getSectionIndexForItem:(NSObject *)item
+{
+	NSUInteger itemIndex = [self.items indexOfObjectIdenticalTo:item];
+	NSString *sectionHeader = [self getHeaderTitleForItemAtIndex:itemIndex];
+	
+	NSUInteger sectionIndex = NSNotFound;
+	for(NSUInteger i=0; i<self.sectionCount; i++)
+		if([[self sectionAtIndex:i].headerTitle isEqualToString:sectionHeader])
+		   {
+			   sectionIndex = i;
+			   break;
+		   }
+	
+	return sectionIndex;
 }
 
 - (SCArrayOfItemsSection *)createSectionWithHeaderTitle:(NSString *)title
@@ -1337,6 +1324,34 @@
 	}
 	
 	[section addNewItem:newItem];
+}
+
+- (void)itemModified:(NSObject *)item inSection:(SCArrayOfItemsSection *)section
+{
+	NSUInteger oldSectionIndex = [self indexForSection:section];
+	NSUInteger newSectionIndex = [self getSectionIndexForItem:item];
+	
+	if(oldSectionIndex == newSectionIndex)
+	{
+		[section itemModified:item];
+	}
+	else
+	{
+		// remove item from old section
+		NSIndexPath *oldIndexPath = 
+			[NSIndexPath indexPathForRow:[section.items indexOfObjectIdenticalTo:item]
+							   inSection:oldSectionIndex];
+		[section.items removeObjectAtIndex:oldIndexPath.row];
+		[self.modeledTableView 
+		   deleteRowsAtIndexPaths:[NSArray arrayWithObject:oldIndexPath] 
+				withRowAnimation:UITableViewRowAnimationRight];
+		
+		[item retain];
+		[self.items removeObjectIdenticalTo:item];
+		// add the item from scratch
+		[self addNewItem:item];
+		[item release];
+	}
 }
 
 // Overrides superclass

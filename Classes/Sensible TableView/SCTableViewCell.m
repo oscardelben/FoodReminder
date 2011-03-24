@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -25,17 +25,6 @@
 #import "SCGlobals.h"
 #import "SCTableViewModel.h"
 
-
-@interface SCTableViewCell (PRIVATE)
-
-@property (nonatomic, retain) NSObject *boundObject;
-@property (nonatomic, copy) NSString *boundKey;
-@property (nonatomic, readwrite) BOOL needsCommit;
-
-- (void)prepareCellForViewControllerAppearing;
-- (void)prepareCellForViewControllerDisappearing;
-
-@end
 
 
 
@@ -170,13 +159,7 @@
 		self.textLabel.text = cellText;
 		
 		self.boundObject = object;
-		
-		// Only bind property name if property exists
-		BOOL propertyExists;
-		@try { [self.boundObject valueForKey:propertyName]; propertyExists = TRUE; }
-		@catch (NSException *exception) { propertyExists = FALSE; }
-		if(propertyExists)
-			boundPropertyName = [propertyName copy];
+		self.boundPropertyName = propertyName;
 	}
 	return self;
 }
@@ -218,18 +201,31 @@
 	if([boundObject isKindOfClass:[NSManagedObject class]])
 		coreDataBound = TRUE;
 #endif
+	
+	// validate existing boundPropertyName
+	if(self.boundPropertyName)
+		self.boundPropertyName = self.boundPropertyName;
+}
+
+- (void)setBoundPropertyName:(NSString *)propertyName
+{
+	[boundPropertyName release];
+	boundPropertyName = nil;
+	
+	// Only bind property name if property exists
+	BOOL propertyExists;
+	@try { [self.boundObject valueForKey:propertyName]; propertyExists = TRUE; }
+	@catch (NSException *exception) { propertyExists = FALSE; }
+	if(propertyExists)
+	{
+		boundPropertyName = [propertyName copy];
+	}
 }
 
 - (void)setBoundKey:(NSString *)key
 {
 	[boundKey release];
 	boundKey = [key copy];
-}
-
-//don't remove
-- (void)setNeedsCommit:(BOOL)needs
-{
-	needsCommit = needs;
 }
 
 //overrides superclass
@@ -401,7 +397,7 @@
 
 - (void)cellValueChanged
 {
-	self.needsCommit = TRUE;
+	needsCommit = TRUE;
 	
 	if(self.commitChangesLive)
 		[self commitChanges];
@@ -451,7 +447,7 @@
 
 - (void)commitChanges
 {
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 - (void)reloadBoundValue
@@ -468,16 +464,40 @@
 
 - (void)prepareCellForViewControllerAppearing
 {
-	[self.ownerTableViewModel prepareModelForCustomDetailViewAppearing];
+	// disable ownerViewControllerDelegate
+	if([self.ownerTableViewModel.viewController isKindOfClass:[SCTableViewController class]])
+	{
+		SCTableViewController *_tableViewController = (SCTableViewController *)self.ownerTableViewModel.viewController;
+		ownerViewControllerDelegate = _tableViewController.delegate;
+		_tableViewController.delegate = nil;
+	}
+	else
+		if([self.ownerTableViewModel.viewController isKindOfClass:[SCViewController class]])
+		{
+			SCViewController *_viewController = (SCViewController *)self.ownerTableViewModel.viewController;
+			ownerViewControllerDelegate = _viewController.delegate;
+			_viewController.delegate = nil;
+		}
 	
-	// also lock master cell selection (in case a custom detail view is provided)
+	// lock master cell selection (in case a custom detail view is provided)
 	if(self.ownerTableViewModel.masterModel)
 		self.ownerTableViewModel.masterModel.lockCellSelection = TRUE;
 }
 
 - (void)prepareCellForViewControllerDisappearing
 {
-	[self.ownerTableViewModel prepareModelForCustomDetailViewDisappearing];
+	// enable ownerViewControllerDelegate
+	if([self.ownerTableViewModel.viewController isKindOfClass:[SCTableViewController class]])
+	{
+		SCTableViewController *_tableViewController = (SCTableViewController *)self.ownerTableViewModel.viewController;
+		_tableViewController.delegate = ownerViewControllerDelegate;
+	}
+	else
+		if([self.ownerTableViewModel.viewController isKindOfClass:[SCViewController class]])
+		{
+			SCViewController *_viewController = (SCViewController *)self.ownerTableViewModel.viewController;
+			_viewController.delegate = ownerViewControllerDelegate;
+		}
 	
 	// resume cell selection
 	if(self.ownerTableViewModel.masterModel)
@@ -491,8 +511,6 @@
 
 
 @interface SCControlCell ()
-
-- (void)commitValueForControlWithTag:(NSInteger)controlTag value:(NSObject *)controlValue;
 
 // handles label auto-resizing
 - (void)setTextForLabel:(UILabel *)label text:(NSString *)_text;
@@ -737,7 +755,7 @@
 						}
 	}
 	
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 - (NSObject *)boundValueForControlWithTag:(NSInteger)controlTag
@@ -980,6 +998,18 @@
 #pragma mark -
 #pragma mark UITextView methods
 
+- (BOOL)textViewShouldBeginEditing:(UITextView *)_textView
+{
+	[SCModelCenter sharedModelCenter].keyboardIssuer = self.ownerTableViewModel.viewController;
+	return TRUE;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)_textView
+{
+	[SCModelCenter sharedModelCenter].keyboardIssuer = self.ownerTableViewModel.viewController;
+	return TRUE;
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)_textView
 {
 	self.ownerTableViewModel.activeCell = self;
@@ -995,6 +1025,18 @@
 
 #pragma mark -
 #pragma mark UITextField methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)_textField
+{
+	[SCModelCenter sharedModelCenter].keyboardIssuer = self.ownerTableViewModel.viewController;
+	return TRUE;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)_textField
+{
+	[SCModelCenter sharedModelCenter].keyboardIssuer = self.ownerTableViewModel.viewController;
+	return TRUE;
+}
 
 - (void)textFieldEditingChanged:(id)sender
 {
@@ -1233,7 +1275,6 @@
 	labelFrame.origin.y -= 1;
 	self.label.frame = labelFrame;
 	
-	
 	if([self.ownerTableViewModel.delegate conformsToProtocol:@protocol(SCTableViewModelDelegate)]
 	   && [self.ownerTableViewModel.delegate respondsToSelector:@selector(tableViewModel:didLayoutSubviewsForCell:forRowAtIndexPath:)])
 	{
@@ -1459,7 +1500,7 @@
 	[super commitChanges];
 	
 	self.boundValue = self.textView.text;
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -1475,6 +1516,7 @@
 		self.minimumHeight = textViewAttributes.minimumHeight;
 	if(textViewAttributes.maximumHeight > 0)
 		self.maximumHeight = textViewAttributes.maximumHeight;
+	self.autoResize = textViewAttributes.autoResize;
 	self.textView.editable = textViewAttributes.editable;
 }
 
@@ -1676,7 +1718,7 @@
 	if(![self isKindOfClass:[SCNumericTextFieldCell class]])
 		self.boundValue = self.textField.text;
 	
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -1777,7 +1819,7 @@
 		self.boundValue = [NSNumber numberWithDouble:[self.textField.text doubleValue]];
 	else
 		self.boundValue = nil;
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -1924,7 +1966,7 @@
 	[super commitChanges];
 	
 	self.boundValue = [NSNumber numberWithFloat:self.slider.value];
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -2091,7 +2133,7 @@
 	[super commitChanges];
 	
 	self.boundValue = [NSNumber numberWithInt:self.segmentedControl.selectedSegmentIndex];
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -2256,7 +2298,7 @@
 	[super commitChanges];
 	
 	self.boundValue = [NSNumber numberWithBool:self.switchControl.on];
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 - (UISwitch *)switchControl
@@ -2316,6 +2358,7 @@
 		 forControlEvents:UIControlEventValueChanged];
 	
 	pickerField = [[UITextField alloc] initWithFrame:CGRectZero];
+	pickerField.delegate = self;
 	pickerField.inputView = datePicker;
 	[self.contentView addSubview:pickerField];
 	
@@ -2418,7 +2461,7 @@
 	
 	if(self.label.text)	// if a date value have been selected
 		self.boundValue = self.datePicker.date;
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -2432,6 +2475,8 @@
 	SCDateAttributes *dateAttributes = (SCDateAttributes *)attributes;
 	if(dateAttributes.dateFormatter)
 		self.dateFormatter = dateAttributes.dateFormatter;
+	self.datePicker.datePickerMode = dateAttributes.datePickerMode;
+	self.displayDatePickerInDetailView = dateAttributes.displayDatePickerInDetailView;
 }
 
 //overrides superclass
@@ -2529,7 +2574,6 @@
 	[detailViewController.view addSubview:self.datePicker];
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 	[self prepareCellForViewControllerAppearing];
 	if(navController && !self.detailViewModal)
 	{
@@ -2608,6 +2652,9 @@
 
 - (void)viewControllerWillAppear:(SCViewController *)viewController
 {
+	if(viewController.state != SCViewControllerStateNew)
+		return;
+	
 	// Center the picker in the detailViewController
 	CGRect pickerFrame = self.datePicker.frame;
 	pickerFrame.origin.x = (viewController.view.frame.size.width - pickerFrame.size.width)/2;
@@ -2633,7 +2680,9 @@
 - (void)viewControllerWillDisappear:(SCViewController *)viewController
 					  cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
+	if(viewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[self prepareCellForViewControllerDisappearing];
 	
 	if(cancelTapped)
@@ -2661,6 +2710,9 @@
 - (void)viewControllerDidDisappear:(SCViewController *)viewController 
 				cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(viewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewDidDisappearForCell:)])
 	{
@@ -2899,7 +2951,7 @@
 	
 	self.boundValue = self.selectedImageName;
 	
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -3010,7 +3062,6 @@
 	}
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 	[self prepareCellForViewControllerAppearing];
 	if(navController)
 	{
@@ -3093,7 +3144,6 @@
 	else
 	{
 #endif
-		[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 		[self prepareCellForViewControllerAppearing];
 		[self.ownerTableViewModel.viewController presentModalViewController:self.imagePickerController
 																   animated:TRUE];
@@ -3134,7 +3184,6 @@
 {
 	[self.imagePickerController dismissModalViewControllerAnimated:TRUE];
 	
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
 	[self prepareCellForViewControllerDisappearing];
 }
 
@@ -3151,7 +3200,6 @@
 	else
 	{
 #endif
-		[self.ownerTableViewModel resumeAutoResizeForKeyboard];
 		[self prepareCellForViewControllerDisappearing];
 #ifdef __IPHONE_3_2
 	}
@@ -3203,6 +3251,10 @@
 
 - (void)viewControllerWillAppear:(SCViewController *)viewController
 {
+	if(viewController.state != SCViewControllerStateNew)
+		return;
+	
+	
 	[self addImageViewToDetailView:viewController];
 	
 	
@@ -3226,7 +3278,9 @@
 - (void)viewControllerWillDisappear:(SCViewController *)viewController 
 				 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
+	if(viewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[self prepareCellForViewControllerDisappearing];
 }
 
@@ -3577,7 +3631,6 @@
 		SCTableViewModel *detailTableViewModel = [self.ownerTableViewModel.dataSource 
 												  tableViewModel:self.ownerTableViewModel
 												  customDetailTableViewModelForRowAtIndexPath:indexPath];
-        
 		if(detailTableViewModel)
 		{
 			self.tempDetailModel = [[SCTableViewModel alloc] initWithTableView:detailTableViewModel.modeledTableView
@@ -3628,7 +3681,6 @@
 	[self addSelectionSectionToModel:detailViewController.tableViewModel];
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 	[self prepareCellForViewControllerAppearing];
 	if(navController && !self.detailViewModal)
 	{
@@ -3689,7 +3741,7 @@
 		}
 	}
 	
-	self.needsCommit = FALSE;
+	needsCommit = FALSE;
 }
 
 //overrides superclass
@@ -3756,6 +3808,9 @@
 
 - (void)tableViewControllerWillAppear:(SCTableViewController *)tableViewController
 {
+	if(tableViewController.state != SCViewControllerStateNew)
+		return;
+	
 	if(self.autoDismissDetailView && self.hideDetailViewNavigationBar)
 		[self.ownerTableViewModel.viewController.navigationController setNavigationBarHidden:YES animated:YES];
 	
@@ -3779,7 +3834,9 @@
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[self prepareCellForViewControllerDisappearing];
 	[self.ownerTableViewModel.viewController.navigationController setNavigationBarHidden:FALSE animated:YES];
 	
@@ -3808,6 +3865,9 @@
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewDidDisappearForCell:)])
 	{
@@ -4145,7 +4205,6 @@
 	[self addObjectSectionToModel:detailViewController.tableViewModel];
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 	[self prepareCellForViewControllerAppearing];
 	if(navController && !self.detailViewModal)
 	{
@@ -4227,6 +4286,9 @@
 
 - (void)tableViewControllerWillAppear:(SCTableViewController *)tableViewController
 {
+	if(tableViewController.state != SCViewControllerStateNew)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewWillAppearForCell:withDetailTableViewModel:)])
 	{
@@ -4247,7 +4309,9 @@
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 				 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	[self prepareCellForViewControllerDisappearing];
 	
 	if(cancelTapped)
@@ -4274,6 +4338,9 @@
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewDidDisappearForCell:)])
 	{
@@ -4354,7 +4421,7 @@
 	allowMovingItems = TRUE;
 	allowEditDetailView = TRUE;
 	allowRowSelection = TRUE;
-	autoSelectNewItemCell = TRUE;
+	autoSelectNewItemCell = FALSE;
 	displayItemsCountInBadgeView = TRUE;
 }
 
@@ -4574,7 +4641,6 @@
 	[self addObjectsSectionToModel:detailViewController.tableViewModel];
 	
 	BOOL inPopover = [SCHelper isViewInsidePopover:self.ownerTableViewModel.viewController.view];
-	[self.ownerTableViewModel pauseAutoResizeForKeyboard];
 	[self prepareCellForViewControllerAppearing];
 	if(inPopover)
 		detailViewController.modalInPopover = TRUE;
@@ -4604,6 +4670,9 @@
 
 - (void)tableViewControllerWillAppear:(SCTableViewController *)tableViewController
 {
+	if(tableViewController.state != SCViewControllerStateNew)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewWillAppearForCell:withDetailTableViewModel:)])
 	{
@@ -4624,6 +4693,9 @@
 - (void)tableViewControllerWillDisappear:(SCTableViewController *)tableViewController
 					  cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if(self.editing)
 	{
 		[super tableViewControllerWillDisappear:tableViewController
@@ -4631,7 +4703,6 @@
 		return;
 	}
 	
-	[self.ownerTableViewModel resumeAutoResizeForKeyboard];
 	[self prepareCellForViewControllerDisappearing];
 	
 	if(cancelTapped)
@@ -4659,6 +4730,9 @@
 - (void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController 
 					 cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped
 {
+	if(tableViewController.state != SCViewControllerStateDismissed)
+		return;
+	
 	if([self.delegate conformsToProtocol:@protocol(SCTableViewCellDelegate)]
 	   && [self.delegate respondsToSelector:@selector(detailViewDidDisappearForCell:)])
 	{

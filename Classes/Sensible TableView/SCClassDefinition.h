@@ -12,13 +12,12 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
  *
  */
-
 
 #import <Foundation/Foundation.h>
 #import "SCPropertyAttributes.h"
@@ -73,7 +72,9 @@ typedef enum
 	/*!	The object bound to the property will generate an SCArrayOfObjectsCell interface element */
 	SCPropertyTypeArrayOfObjects,
 	/*!	The object bound to the property will not generate an interface element */
-	SCPropertyTypeNone
+	SCPropertyTypeNone,
+	/*!	Undefined property type */
+	SCPropertyTypeUndefined
 	
 } SCPropertyType;
 
@@ -98,9 +99,11 @@ typedef enum
 	NSString *name;
 	NSString *title;
 	SCPropertyType type;
+	SCPropertyAttributes *attributes;
+	SCPropertyType editingModeType;
+	SCPropertyAttributes *editingModeAttributes;
 	BOOL required;
 	BOOL autoValidate;
-	SCPropertyAttributes *attributes;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -166,9 +169,18 @@ typedef enum
  *	be generated for the property. */
 @property (nonatomic, readwrite) SCPropertyType type;
 
-/*! The attibutes set of the property. Property attributes gives the user the ability
- *	to further customize the user interface element that will be generated for the property. */
+/*! The attibutes set associated with the type of the property. Property attributes gives the user the ability
+ *	to further customize the user interface element that will be generated for the given property type. */
 @property (nonatomic, retain) SCPropertyAttributes *attributes;
+
+/*! The type of the property while in editing mode. Property types determines which user interface element will
+ *	be generated for the property while in editing mode. 
+ *	Note: If not set (or set to SCPropertyTypeUndefined), the value set in the "type" property is used in editing mode. */
+@property (nonatomic, readwrite) SCPropertyType editingModeType;
+
+/*! The attibutes set associated with the editingModetype of the property. Property attributes gives the user the ability
+ *	to further customize the user interface element that will be generated for the given property editingModetype. */
+@property (nonatomic, retain) SCPropertyAttributes *editingModeAttributes;
 
 /*! Set to TRUE if property is a required property. Default: FALSE. */
 @property (nonatomic, readwrite) BOOL required;

@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -57,6 +57,7 @@
 	NSString *reuseId; //used internally
 	
 	SCTableViewModel *ownerTableViewModel;
+	id ownerViewControllerDelegate; 
 	id delegate;
 	NSObject *boundObject;
 	NSString *boundPropertyName;
@@ -157,13 +158,13 @@
 @property (nonatomic, assign) id delegate;
 
 /*! The cell's bound object (see class overview). */
-@property (nonatomic, readonly) NSObject *boundObject;
+@property (nonatomic, retain) NSObject *boundObject;
 
 /*! The cell's bound property name (see class overview). */
-@property (nonatomic, readonly) NSString *boundPropertyName;
+@property (nonatomic, copy) NSString *boundPropertyName;
 
 /*! The cell's bound key (see class overview). */
-@property (nonatomic, readonly) NSString *boundKey;
+@property (nonatomic, copy) NSString *boundKey;
 
 /*! The height of the cell. */
 @property (nonatomic, readwrite) CGFloat height;
@@ -316,6 +317,12 @@
  *	value. If what you want is to be able to provide custom cell value validation,
  *	consider using either SCTableViewCellDelegate or SCTableViewModelDelegate methods. */
 - (BOOL)getValueIsValid;
+
+/*! Method is called internally by the framework before a detail view appears. */
+- (void)prepareCellForViewControllerAppearing;
+
+/*! Method is called internally by the framework before a detail view disappears. */
+- (void)prepareCellForViewControllerDisappearing;
 
 
 @end
@@ -540,6 +547,9 @@
 
 /*! Returns the bound value for the control with the given tag value. Returns nil if controlTag is less than 1. */
 - (NSObject *)boundValueForControlWithTag:(NSInteger)controlTag;
+
+/*! Commits the bound value for the control with the given tag value. */
+- (void)commitValueForControlWithTag:(NSInteger)controlTag value:(NSObject *)controlValue;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /// @name Internal Methods (should only be used when subclassing)

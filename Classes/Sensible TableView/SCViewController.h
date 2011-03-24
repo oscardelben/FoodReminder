@@ -12,7 +12,7 @@
  *	USAGE OF THIS SOURCE CODE IS BOUND BY THE LICENSE AGREEMENT PROVIDED WITH THE 
  *	DOWNLOADED PRODUCT.
  *
- *  Copyright 2010 Sensible Cocoa. All rights reserved.
+ *  Copyright 2010-2011 Sensible Cocoa. All rights reserved.
  *
  *
  *	This notice may not be removed from this file.
@@ -60,6 +60,8 @@
 	UIToolbar *buttonsToolbar;
 	BOOL cancelButtonTapped;
 	BOOL doneButtonTapped;
+	
+	SCViewControllerState state;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +93,9 @@
 
 /*! The toolbar that holds more than one button when needed (e.g. when navigationBarType==SCNavigationBarTypeAddEditRight). */
 @property (nonatomic, readonly) UIToolbar *buttonsToolbar;
+
+/*! The current state of the view controller. */
+@property (nonatomic, readonly) SCViewControllerState state;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
