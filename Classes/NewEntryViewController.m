@@ -85,14 +85,14 @@
     
     UIView *buttonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     
-    saveButton = [[ClassyButton alloc] initWithFrame:CGRectMake(21, 10, 120, 30)];
+    saveButton = [[ClassyButton alloc] initWithFrame:CGRectMake(21, 17, 120, 30)];
     saveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     saveButton.hidden = YES;
     [saveButton setTitle:@"Save" forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [buttonsView addSubview:saveButton];
     
-    saveAndCreateButton = [[ClassyButton alloc] initWithFrame:CGRectMake(160, 10, 140, 30)];
+    saveAndCreateButton = [[ClassyButton alloc] initWithFrame:CGRectMake(160, 17, 140, 30)];
     saveAndCreateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     saveAndCreateButton.hidden = YES;
     [saveAndCreateButton setTitle:@"Save & New" forState:UIControlStateNormal];
