@@ -62,7 +62,7 @@
 
 - (IBAction)addEntry:(id)sender;
 {
-    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithNibName:@"NewEntryViewController" bundle:nil];
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
     viewController.parentController = self;
     
     [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
@@ -73,7 +73,7 @@
 
 - (void)createNewEntryWithCurlAnimation
 {
-    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithNibName:@"NewEntryViewController" bundle:nil];
+    NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
     viewController.parentController = self;
     
     UINavigationController *detailNavController = [[UINavigationController alloc] 

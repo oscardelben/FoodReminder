@@ -11,7 +11,7 @@
 
 @class ClassyButton;
 
-@interface NewEntryViewController : UIViewController <SCTableViewModelDelegate> {
+@interface NewEntryViewController : UITableViewController <SCTableViewModelDelegate> {
     NSManagedObject *entry;
     
     SCTableViewModel *tableModel;
@@ -20,7 +20,6 @@
 }
 
 @property (nonatomic, retain) id parentController;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) ClassyButton *saveButton;
 @property (nonatomic, retain) ClassyButton *saveAndCreateButton;
 

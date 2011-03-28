@@ -14,12 +14,11 @@
 @implementation NewEntryViewController
 
 @synthesize parentController;
-@synthesize tableView;
 @synthesize saveButton, saveAndCreateButton;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         managedObjectContext = 
 		[(FoodReminderAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -33,7 +32,6 @@
 - (void)dealloc
 {
     [tableModel release];
-    [tableView release];
     [saveButton release];
     [saveAndCreateButton release];
     
@@ -52,13 +50,14 @@
     
     self.navigationController.navigationBarHidden = YES;
     
-    tableView.backgroundColor = [UIColor clearColor];
-    tableView.separatorColor = [UIColor blackColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor blackColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    self.tableView.scrollEnabled = NO;
     
     // table model
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
-    //tableModel.delegate = self;
     
     SCTableViewSection *section = [SCTableViewSection section];
     [tableModel addSection:section];

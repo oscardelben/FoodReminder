@@ -33,7 +33,6 @@
 		559B0EF213361A7300180E4E /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF113361A7300180E4E /* background.png */; };
 		559B0EF413361CA500180E4E /* tableBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 559B0EF313361CA500180E4E /* tableBackground.png */; };
 		559B0F0613363A6200180E4E /* ClassyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B0F0513363A6200180E4E /* ClassyButton.m */; };
-		559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F0713363AAC00180E4E /* NewEntryViewController.xib */; };
 		559B0F1213363DA300180E4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559B0F1113363DA300180E4E /* QuartzCore.framework */; };
 		559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 559B0F151336A90000180E4E /* BrushScriptStd.ttf */; };
 		55B9DBBC132B8E290011585E /* NewEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B9DBBB132B8E270011585E /* NewEntryViewController.m */; };
@@ -84,7 +83,6 @@
 		559B0EF313361CA500180E4E /* tableBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableBackground.png; sourceTree = "<group>"; };
 		559B0F0413363A6200180E4E /* ClassyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassyButton.h; sourceTree = "<group>"; };
 		559B0F0513363A6200180E4E /* ClassyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassyButton.m; sourceTree = "<group>"; };
-		559B0F0713363AAC00180E4E /* NewEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewEntryViewController.xib; sourceTree = "<group>"; };
 		559B0F1113363DA300180E4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		559B0F151336A90000180E4E /* BrushScriptStd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrushScriptStd.ttf; sourceTree = "<group>"; };
 		55B9DBBA132B8E260011585E /* NewEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEntryViewController.h; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				28D3F201112F7DC200FD0661 /* FoodReminder.xcdatamodeld */,
 				8D1107310486CEB800E47090 /* FoodReminder-Info.plist */,
 				559B0EEF13360AF900180E4E /* EntriesViewController.xib */,
-				559B0F0713363AAC00180E4E /* NewEntryViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -329,7 +326,6 @@
 				559B0EF013360AF900180E4E /* EntriesViewController.xib in Resources */,
 				559B0EF213361A7300180E4E /* background.png in Resources */,
 				559B0EF413361CA500180E4E /* tableBackground.png in Resources */,
-				559B0F0813363AAC00180E4E /* NewEntryViewController.xib in Resources */,
 				559B0F161336A90000180E4E /* BrushScriptStd.ttf in Resources */,
 				5534856E1339F7EE00816A66 /* Help.png in Resources */,
 				553487FE133BDAD500816A66 /* LICENSE AGREEMENT.rtf in Resources */,
