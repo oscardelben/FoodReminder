@@ -9,6 +9,9 @@
 #import "EntriesViewController.h"
 #import "FoodReminderAppDelegate.h"
 #import "NewEntryViewController.h"
+#import "InformationViewController.h"
+#import "InstructionsViewController.h"
+#import "Entry.h"
 
 @implementation EntriesViewController
 
@@ -21,6 +24,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Show instructions
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:@"instructions-shown"]) {
+        InstructionsViewController *viewController = [[InstructionsViewController alloc] initWithNibName:@"InstructionsViewController" bundle:nil];
+        [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [self presentModalViewController:viewController animated:NO];
+        [viewController release];
+    }
     
     tableView.backgroundColor = [UIColor clearColor];
     tableView.separatorColor = [UIColor blackColor];
@@ -57,7 +69,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    return toInterfaceOrientation == UIInterfaceOrientationPortrait || 
+            toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (IBAction)addEntry:(id)sender;
@@ -94,6 +107,13 @@
     [tableModel.modeledTableView reloadData];
 }
 
+- (IBAction)showInformation:(id)sender
+{
+    InformationViewController *viewController = [[InformationViewController alloc] initWithNibName:@"InformationViewController" bundle:nil];
+    [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentModalViewController:viewController animated:YES];
+    [viewController release];
+}
 
 #pragma mark -
 #pragma mark SCTableViewModelDelegate Methods
@@ -109,37 +129,14 @@
     // Detail Text Label
     SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
 																   sectionAtIndex:indexPath.section];
-	NSManagedObject *entry = [section.items objectAtIndex:indexPath.row];
-    
-    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    
-    //cell.detailTextLabel.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
-    //cell.detailTextLabel.textColor = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
+	Entry *entry = (Entry *)[section.items objectAtIndex:indexPath.row];
     
     SCBadgeView *badge = [[SCBadgeView alloc] init];
-    cell.badgeView.text = [dateFormatter stringFromDate:[entry valueForKey:@"due_to"]];
+    cell.badgeView.text = [entry readableDate];
     cell.badgeView.color = [UIColor colorWithRed:119/255.0 green:79/255.0 blue:56/255.0 alpha:1];
-    //cell.badgeView.font = [UIFont fontWithName:@"Helvetica" size:12];
     cell.highlighted = YES;
     [badge release];
 }
 
-/*
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SCArrayOfObjectsSection *section = (SCArrayOfObjectsSection *)[tableViewModel 
-																   sectionAtIndex:indexPath.section];
-	NSManagedObject *entry = [section.items objectAtIndex:indexPath.row];
-    
-    EditEntryViewController *editViewController = [[EditEntryViewController alloc] initWithNibName:@"EditEntryViewController" bundle:nil];
-    editViewController.entry = entry;
-    editViewController.parentController = self;
-    
-    [self.navigationController pushViewController:editViewController animated:YES];
-    [editViewController release];
-}
-*/
 
 @end

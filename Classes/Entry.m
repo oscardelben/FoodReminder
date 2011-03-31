@@ -30,4 +30,30 @@
     return [managedObjectContext countForFetchRequest:fetchReq error:&error];
 }
 
+- (NSString *)readableDate
+{
+    NSDate *date = [self valueForKey:@"due_to"];
+    
+    if ([date today])
+    {
+        return @"Today";
+    }
+    else if ([[date tomorrow] today])
+    {
+        return @"Yesterday";
+    }
+    else if ([[date yesterday] today])
+    {
+        return @"Tomorrow";
+    }
+    else
+    {
+        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+        return [dateFormatter stringFromDate:date];
+    }
+}
+
 @end

@@ -28,7 +28,7 @@
     
     [self.window addSubview:navController.view];
     [self.window makeKeyAndVisible];
-    
+        
     return YES;
 }
 
@@ -47,7 +47,7 @@
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     [self saveContext];
-    [self setLocalNotificationsForApplication:application];
+    [self setLocalNotificationsForApplication];
 }
 
 
@@ -70,9 +70,8 @@
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self saveContext];
-    [self setLocalNotificationsForApplication:application];
+    [self setLocalNotificationsForApplication];
 }
-
 
 - (void)saveContext {
     
@@ -91,10 +90,13 @@
     }
 }
 
-- (void)setLocalNotificationsForApplication:(UIApplication *)application
+- (void)setLocalNotificationsForApplication
+
 {
-    // TODO: tis only works if they open the app daily. It would be cool to have a background process
+    /*
+    UIApplication *application = [UIApplication sharedApplication];
     application.applicationIconBadgeNumber = [Entry expiringToday];
+    */
 }
 
 

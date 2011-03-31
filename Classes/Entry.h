@@ -17,4 +17,6 @@
 
 + (int)expiringToday;
 
+- (NSString *)readableDate;
+
 @end

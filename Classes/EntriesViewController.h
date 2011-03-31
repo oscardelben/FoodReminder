@@ -19,5 +19,6 @@
 
 - (void)reloadEntries;
 - (IBAction)addEntry:(id)sender;
+- (IBAction)showInformation:(id)sender;
 
 @end

@@ -41,7 +41,8 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    return toInterfaceOrientation == UIInterfaceOrientationPortrait || 
+    toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown;
 }
 
 - (void)viewDidLoad
@@ -64,13 +65,13 @@
     
     // Name
     SCTextFieldCell *nameCell = [SCTextFieldCell cellWithText:@"Name" withBoundObject:entry withPropertyName:@"name"];
-    nameCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:20];
+    nameCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:22];
     nameCell.textField.textAlignment = UITextAlignmentRight;
     [section addCell:nameCell];
     
     // Due To
-    SCDateCell *dateCell = [SCDateCell cellWithText:@"Due to" withBoundObject:entry withDatePropertyName:@"due_to"];
-    dateCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:20];
+    SCDateCell *dateCell = [SCDateCell cellWithText:@"Expires" withBoundObject:entry withDatePropertyName:@"due_to"];
+    dateCell.textLabel.font = [UIFont fontWithName:@"BrushScriptStd" size:22];
     dateCell.datePicker.datePickerMode = UIDatePickerModeDate;
     
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
