@@ -13,6 +13,7 @@
 @implementation FoodReminderAppDelegate
 
 @synthesize window;
+@synthesize splashScreen;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -27,6 +28,11 @@
     self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     
     [self.window addSubview:navController.view];
+    
+    splashScreen = [[PRPSplashScreenViewController alloc] init];
+    splashScreen.delegate = self;
+    [splashScreen showInWindow:self.window];
+    
     [self.window makeKeyAndVisible];
         
     return YES;
@@ -183,6 +189,13 @@
     return persistentStoreCoordinator_;
 }
 
+#pragma mark -
+#pragma mark PRPSplashScreenDelegate methods
+
+- (void)splashScreenDidDisappear:(PRPSplashScreenViewController *)aSplashScreen
+{
+    [splashScreen release];
+}
 
 #pragma mark -
 #pragma mark Application's Documents directory

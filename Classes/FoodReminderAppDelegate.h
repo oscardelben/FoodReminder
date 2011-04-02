@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "PRPSplashScreenViewController.h"
 
-@interface FoodReminderAppDelegate : NSObject <UIApplicationDelegate> {
+@interface FoodReminderAppDelegate : NSObject <UIApplicationDelegate, PRPSplashScreenDelegate> {
     
     UIWindow *window;
     UINavigationController *navigationController;
@@ -21,6 +22,8 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+
+@property (nonatomic, retain) PRPSplashScreenViewController *splashScreen;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

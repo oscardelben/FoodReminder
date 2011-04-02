@@ -121,6 +121,7 @@
 		55D87C2713472B4A00E273C4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2513472B4A00E273C4 /* Default@2x.png */; };
 		55D87C2913472BF900E273C4 /* Default-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2813472BF900E273C4 /* Default-PortraitUpsideDown.png */; };
 		55D87C2B13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2A13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png */; };
+		55D87C2E13472EB200E273C4 /* PRPSplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D87C2D13472EB200E273C4 /* PRPSplashScreenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -325,6 +326,8 @@
 		55D87C2513472B4A00E273C4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		55D87C2813472BF900E273C4 /* Default-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-PortraitUpsideDown.png"; sourceTree = "<group>"; };
 		55D87C2A13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x-PortraitUpsideDown.png"; sourceTree = "<group>"; };
+		55D87C2C13472EB200E273C4 /* PRPSplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPSplashScreenViewController.h; sourceTree = "<group>"; };
+		55D87C2D13472EB200E273C4 /* PRPSplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPSplashScreenViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FoodReminder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FoodReminder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -511,6 +514,8 @@
 				55C9379413432D7800EBA049 /* InstructionsViewController.m */,
 				55C938991344E56E00EBA049 /* MailComposerViewController.h */,
 				55C9389A1344E56E00EBA049 /* MailComposerViewController.m */,
+				55D87C2C13472EB200E273C4 /* PRPSplashScreenViewController.h */,
+				55D87C2D13472EB200E273C4 /* PRPSplashScreenViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1058,6 +1063,7 @@
 				55C938831344E3FA00EBA049 /* SHKShareMenu.m in Sources */,
 				55C938841344E3FA00EBA049 /* SHKViewControllerWrapper.m in Sources */,
 				55C9389B1344E56E00EBA049 /* MailComposerViewController.m in Sources */,
+				55D87C2E13472EB200E273C4 /* PRPSplashScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
