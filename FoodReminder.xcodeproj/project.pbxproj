@@ -110,6 +110,17 @@
 		55C938881344E43200EBA049 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C938871344E43200EBA049 /* Security.framework */; };
 		55C9388A1344E43B00EBA049 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C938891344E43B00EBA049 /* MessageUI.framework */; };
 		55C9389B1344E56E00EBA049 /* MailComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C9389A1344E56E00EBA049 /* MailComposerViewController.m */; };
+		55D87C1C134729A800E273C4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C16134729A800E273C4 /* Icon-72.png */; };
+		55D87C1D134729A800E273C4 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C17134729A800E273C4 /* Icon-Small-50.png */; };
+		55D87C1E134729A800E273C4 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C18134729A800E273C4 /* Icon-Small.png */; };
+		55D87C1F134729A800E273C4 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C19134729A800E273C4 /* Icon-Small@2x.png */; };
+		55D87C20134729A800E273C4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C1A134729A800E273C4 /* Icon.png */; };
+		55D87C21134729A800E273C4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C1B134729A800E273C4 /* Icon@2x.png */; };
+		55D87C23134729B000E273C4 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C22134729B000E273C4 /* iTunesArtwork.png */; };
+		55D87C2613472B4A00E273C4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2413472B4A00E273C4 /* Default.png */; };
+		55D87C2713472B4A00E273C4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2513472B4A00E273C4 /* Default@2x.png */; };
+		55D87C2913472BF900E273C4 /* Default-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2813472BF900E273C4 /* Default-PortraitUpsideDown.png */; };
+		55D87C2B13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 55D87C2A13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -303,6 +314,17 @@
 		55C938891344E43B00EBA049 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		55C938991344E56E00EBA049 /* MailComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailComposerViewController.h; sourceTree = "<group>"; };
 		55C9389A1344E56E00EBA049 /* MailComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailComposerViewController.m; sourceTree = "<group>"; };
+		55D87C16134729A800E273C4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		55D87C17134729A800E273C4 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		55D87C18134729A800E273C4 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		55D87C19134729A800E273C4 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		55D87C1A134729A800E273C4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		55D87C1B134729A800E273C4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		55D87C22134729B000E273C4 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		55D87C2413472B4A00E273C4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		55D87C2513472B4A00E273C4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		55D87C2813472BF900E273C4 /* Default-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-PortraitUpsideDown.png"; sourceTree = "<group>"; };
+		55D87C2A13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x-PortraitUpsideDown.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* FoodReminder-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FoodReminder-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,6 +392,17 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55D87C2A13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png */,
+				55D87C2813472BF900E273C4 /* Default-PortraitUpsideDown.png */,
+				55D87C2413472B4A00E273C4 /* Default.png */,
+				55D87C2513472B4A00E273C4 /* Default@2x.png */,
+				55D87C22134729B000E273C4 /* iTunesArtwork.png */,
+				55D87C16134729A800E273C4 /* Icon-72.png */,
+				55D87C17134729A800E273C4 /* Icon-Small-50.png */,
+				55D87C18134729A800E273C4 /* Icon-Small.png */,
+				55D87C19134729A800E273C4 /* Icon-Small@2x.png */,
+				55D87C1A134729A800E273C4 /* Icon.png */,
+				55D87C1B134729A800E273C4 /* Icon@2x.png */,
 				55C937981343341100EBA049 /* instructions.html */,
 				559B0F151336A90000180E4E /* BrushScriptStd.ttf */,
 				559B0EEC1336092C00180E4E /* Images */,
@@ -922,6 +955,17 @@
 				55C9385D1344E3FA00EBA049 /* SHKSharers.plist in Resources */,
 				55C938621344E3FA00EBA049 /* Localizable.strings in Resources */,
 				55C938691344E3FA00EBA049 /* FBConnect.bundle in Resources */,
+				55D87C1C134729A800E273C4 /* Icon-72.png in Resources */,
+				55D87C1D134729A800E273C4 /* Icon-Small-50.png in Resources */,
+				55D87C1E134729A800E273C4 /* Icon-Small.png in Resources */,
+				55D87C1F134729A800E273C4 /* Icon-Small@2x.png in Resources */,
+				55D87C20134729A800E273C4 /* Icon.png in Resources */,
+				55D87C21134729A800E273C4 /* Icon@2x.png in Resources */,
+				55D87C23134729B000E273C4 /* iTunesArtwork.png in Resources */,
+				55D87C2613472B4A00E273C4 /* Default.png in Resources */,
+				55D87C2713472B4A00E273C4 /* Default@2x.png in Resources */,
+				55D87C2913472BF900E273C4 /* Default-PortraitUpsideDown.png in Resources */,
+				55D87C2B13472BFF00E273C4 /* Default@2x-PortraitUpsideDown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,7 +1086,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
 				INFOPLIST_FILE = "FoodReminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = FoodReminder;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1056,7 +1100,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FoodReminder_Prefix.pch;
 				INFOPLIST_FILE = "FoodReminder-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = FoodReminder;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
