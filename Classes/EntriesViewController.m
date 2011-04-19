@@ -58,9 +58,13 @@
     objectsSection.allowEditDetailView = NO;
     
 	[tableModel addSection:objectsSection];
+    
+    // Add notification to detect whenever the userrestarts the application, so that we have  achance of redisplaying the table
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadEntries) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)dealloc {	
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[tableModel release];
     [tableView release];
     [appTitle release];
@@ -89,11 +93,11 @@
     NewEntryViewController *viewController = [[NewEntryViewController alloc] initWithStyle:UITableViewStyleGrouped];
     viewController.parentController = self;
     
-    UINavigationController *detailNavController = [[UINavigationController alloc] 
-                                                   initWithRootViewController:viewController];
+    //UINavigationController *detailNavController = [[UINavigationController alloc] 
+                                                   //initWithRootViewController:viewController];
     
     [UIView beginAnimations:nil context:NULL];
-    [self.navigationController presentModalViewController:detailNavController animated:NO];
+    [self.navigationController presentModalViewController:viewController animated:NO];
     
     [UIView setAnimationDuration:0.8];
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:viewController.view.window cache:NO];
